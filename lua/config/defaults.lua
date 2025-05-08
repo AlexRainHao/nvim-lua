@@ -37,3 +37,11 @@ end
 vim.o.colorcolumn = "80"
 vim.o.virtualedit = "block"
 vim.o.mouse = "a"
+
+-- terminal
+-- enter `insert` mode when open terminal
+vim.cmd([[autocmd TermOpen term://* startinsert]])
+vim.cmd([[
+    tnoremap <C-[> <C-\><C-N>
+    tnoremap <C-D> <C-\><C-N><C-O>
+]])
