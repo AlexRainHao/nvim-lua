@@ -23,5 +23,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  require("config.plugins.everforest")
+  require("config.plugins.everforest"),
+  require("config.plugins.fzf"),
 })

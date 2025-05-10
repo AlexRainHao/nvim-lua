@@ -9,8 +9,8 @@ local mappings = {
 	-- Actions
 	{ from = "jk",              to = "<ESC>",                                               mode = mode_i },
 	{ from = "Q",               to = ":q<CR>" },
+	{ from = "<Leader>Q",       to = ":q!<CR>" },
 	{ from = "W",               to = ":wa<CR>" },
-	{ from = ";",               to = ":",                                                   mode = mode_nv },
 	{ from = "v,",              to = "v$" },
 
 	-- Movements
@@ -39,8 +39,8 @@ local mappings = {
 
 	-- Tabs
 	{ from = "tu",              to = ":tabe<CR>" },
-	{ from = "<C-[>",           to = ":tabn<CR>" },
-	{ from = "<C-]>",           to = ":tabp<CR>" },
+	{ from = "<C-[>",           to = ":tabp<CR>" },
+	{ from = "<C-]>",           to = ":tabn<CR>" },
 }
 
 for _, mapping in ipairs(mappings) do
