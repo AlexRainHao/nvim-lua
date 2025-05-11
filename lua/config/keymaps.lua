@@ -39,8 +39,8 @@ local mappings = {
 
 	-- Tabs
 	{ from = "tu",              to = ":tabe<CR>" },
-	{ from = "<C-[>",           to = ":tabp<CR>" },
-	{ from = "<C-]>",           to = ":tabn<CR>" },
+	-- { from = "<C-[>",           to = ":tabp<CR>" },
+	-- { from = "<C-]>",           to = ":tabn<CR>" },
 }
 
 for _, mapping in ipairs(mappings) do
