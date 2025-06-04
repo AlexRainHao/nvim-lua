@@ -26,4 +26,5 @@ require("lazy").setup({
   require("config.plugins.everforest"),
   require("config.plugins.fzf"),
   require("config.plugins.telescope").config,
+  require("config.plugins.bufferline")
 })
