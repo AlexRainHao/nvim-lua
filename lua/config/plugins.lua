@@ -27,5 +27,6 @@ require("lazy").setup({
   require("config.plugins.fzf"),
   require("config.plugins.telescope").config,
   require("config.plugins.bufferline"),
-  require("config.plugins.comment")
+  require("config.plugins.comment"),
+  require("config.plugins.dropbar"),
 })

@@ -2,6 +2,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "commander.nvim": { "branch": "main", "commit": "84101e8eb1613a72bbdec655b734f891d8a00694" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
+  "dropbar.nvim": { "branch": "master", "commit": "64f5540824ab350f02dabc1276f4a1f4f141276b" },
   "everforest-nvim": { "branch": "main", "commit": "2eb7c348f880ba93de4d98cae049c9441f5d4d49" },
   "fzf-lua": { "branch": "main", "commit": "9a4b8011f1bab6c54d78553ac6fb207d6a85287f" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
