@@ -27,13 +27,10 @@ local mappings = {
 	{ from = "<Leader><left>",  to = ":vertical resize -5<CR>" },
 	{ from = "<Leader><right>", to = ":vertical resize +5<CR>" },
 
-	{ from = "s",               to = "<nop>", },
-	{ from = "sj",              to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
-	{ from = "sk",              to = ":set splitbelow<CR>:split<CR>", },
-	{ from = "sl",              to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
-	{ from = "sh",              to = ":set splitright<CR>:vsplit<CR>", },
-	{ from = "ssv",             to = "<C-w>b<C-w>K", },
-	{ from = "ssh",             to = "<C-w>b<C-w>H", },
+	{ from = "<Leader>\\",      to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
+	{ from = "<Leader>\"",      to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
+	{ from = "<Leader>sv",      to = "<C-w>b<C-w>K", },
+	{ from = "<Leader>sh",      to = "<C-w>b<C-w>H", },
 
 	{ from = "<leader>q",       to = "<C-w>j:q<CR>" },
 
