@@ -29,4 +29,5 @@ require("lazy").setup({
   require("config.plugins.bufferline"),
   require("config.plugins.comment"),
   require("config.plugins.dropbar"),
+  require("config.plugins.wilder"),
 })
