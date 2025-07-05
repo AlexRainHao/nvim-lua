@@ -32,5 +32,5 @@ require("lazy").setup({
   require("config.plugins.wilder"),
   require("config.plugins.yank"),
   require("config.plugins.gitsign"),
-  require("config.plugins.scrollbar"),
+  require("config.plugins.highlight"),
 })
