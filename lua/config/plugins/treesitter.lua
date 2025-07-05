@@ -37,10 +37,9 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection    = "<c-n>",
-                        node_incremental  = "<c-n>",
-                        node_decremental  = "<c-h>",
-                        scope_incremental = "<c-l>",
+                        init_selection   = "<c-n>",
+                        node_incremental = "<c-n>",
+                        node_decremental = "<c-l>",
                     },
                 }
             })
@@ -69,4 +68,17 @@ return {
             end, { silent = true })
         end
     },
+    {
+        "RRethy/nvim-treesitter-textsubjects",
+        config = function()
+            require("nvim-treesitter-textsubjects").configure({
+                prev_selection = ',',
+                keymaps = {
+                    ["."] = "textsubjects-smart",
+                    [";"] = "textsubjects-container-outer",
+                    ["i;"] = "textsubjects-container-inner",
+                },
+            })
+        end
+    }
 }
