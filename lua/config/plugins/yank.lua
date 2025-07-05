@@ -2,9 +2,9 @@ return {
     "AckslD/nvim-neoclip.lua",
     dependencies = {
         "nvim-telescope/telescope.nvim",
-        {"kkharji/sqlite.lua", module = "sqlite"},
+        { "kkharji/sqlite.lua", module = "sqlite" },
     },
-    config = function ()
+    config = function()
         vim.keymap.set("n", "<c-y>", ":Telescope neoclip<CR>", { noremap = true })
 
         require("neoclip").setup({
