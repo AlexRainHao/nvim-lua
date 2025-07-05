@@ -48,4 +48,11 @@ return {
 			vim.cmd("hi IlluminatedWordText guibg=#393e4d gui=underline cterm=underline")
 		end
 	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		config = function()
+			require("ibl").setup({})
+		end
+	},
 }

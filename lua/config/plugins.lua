@@ -33,4 +33,5 @@ require("lazy").setup({
   require("config.plugins.yank"),
   require("config.plugins.gitsign"),
   require("config.plugins.highlight"),
+  require("config.plugins.treesitter")
 })
