@@ -23,7 +23,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  require("config.plugins.everforest"),
+  require("config.plugins.ui"),
   require("config.plugins.telescope").config,
   require("config.plugins.fzf"),
   require("config.plugins.bufferline"),

@@ -28,7 +28,7 @@ return {
 					Misc = { color = "purple" },
 				},
 				handlers = {
-					cursor = true,
+					cursor = false,
 					diagnostic = true,
 					gitsigns = true,
 					handle = true,
