@@ -1,13 +1,18 @@
 return {
     {
         "pechorin/any-jump.vim",
-        config = function()
-            vim.keymap.set("n", "gd", ":AnyJump<CR>", { noremap = true })
-            vim.keymap.set("x", "gd", ":AnyJumpVisual<CR>", { noremap = true })
-            vim.keymap.set("n", "go", ":AnyJumpBack<CR>", { noremap = true })
+        init = function()
+            vim.g.any_jump_search_prefered_engine = 'rg'
             vim.g.any_jump_disable_default_keybindings = 1
-            vim.g.any_jump_window_width_ratio = 0.9
-            vim.g.any_jump_window_height_ratio = 0.9
+        end,
+        keys = {
+            { "gd", mode = "n", ":AnyJump<CR>",       desc = "Any jump" },
+            { "gd", mode = "x", ":AnyJumpVisual<CR>", desc = "Any jump visual" },
+            { "go", mode = "n", ":AnyJumpBack<CR>",   desc = "Any jump back" },
+        },
+        config = function()
+            vim.g.any_jump_window_width_ratio = 0.8
+            vim.g.any_jump_window_height_ratio = 0.8
         end
     },
     {
