@@ -36,4 +36,5 @@ require("lazy").setup({
   require("config.plugins.treesitter"),
   require("config.plugins.pair"),
   require("config.plugins.lualine"),
+  require("config.plugins.search"),
 })
