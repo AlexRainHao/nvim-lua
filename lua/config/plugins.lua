@@ -35,4 +35,5 @@ require("lazy").setup({
   require("config.plugins.highlight"),
   require("config.plugins.treesitter"),
   require("config.plugins.pair"),
+  require("config.plugins.lualine"),
 })
