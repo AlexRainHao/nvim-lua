@@ -55,4 +55,25 @@ return {
 			require("ibl").setup({})
 		end
 	},
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			filetypes = { "*" },
+			lazy_load = false,
+			user_default_options = {
+				RGB = true,
+				RRGGBB = true,
+				names = true,
+				RRGGBBAA = true,
+				AARRGGBB = false,
+				css = false,
+				css_fn = false,
+				tailwind = true,
+				mode = "background",
+				sass = { enable = false },
+				virtualtext = "■",
+			}
+		},
+	}
 }
