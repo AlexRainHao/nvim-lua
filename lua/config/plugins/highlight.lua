@@ -100,5 +100,5 @@ return {
 				virtualtext = "■",
 			}
 		},
-	}
+	},
 }

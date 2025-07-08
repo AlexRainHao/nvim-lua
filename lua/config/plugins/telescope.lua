@@ -32,6 +32,38 @@ M.config = {
 			vim.keymap.set("n", "<leader><c-p>", builtin.oldfiles, mode_m)
 			vim.keymap.set("n", "z=", builtin.spell_suggest, mode_m)
 
+			vim.keymap.set('n', '<leader>D', function()
+				builtin.diagnostics({
+					sort_by = "severity"
+				})
+			end, m)
+
+			vim.lsp.protocol.DiagnosticSeverity = {
+				"Error",
+				"Warning",
+				"Information",
+				"Hint",
+				Error = 1,
+				Hint = 4,
+				Information = 3,
+				Warning = 2
+			}
+
+			vim.diagnostic.severity = {
+				"ERROR",
+				"WARN",
+				"INFO",
+				"HINT",
+				E = 1,
+				ERROR = 1,
+				HINT = 4,
+				I = 3,
+				INFO = 3,
+				N = 4,
+				W = 2,
+				WARN = 2
+			}
+
 			local ts = require("telescope")
 			local actions = require("telescope.actions")
 

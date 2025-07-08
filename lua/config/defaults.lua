@@ -37,6 +37,7 @@ end
 vim.o.colorcolumn = "80"
 vim.o.virtualedit = "block"
 vim.o.mouse = "a"
+vim.o.updatetime = 1000
 
 -- terminal
 -- enter `insert` mode when open terminal

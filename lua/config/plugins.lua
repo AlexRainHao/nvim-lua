@@ -37,4 +37,5 @@ require("lazy").setup({
   require("config.plugins.pair"),
   require("config.plugins.lualine"),
   require("config.plugins.search"),
+  require("config.plugins.lsp").config,
 })
