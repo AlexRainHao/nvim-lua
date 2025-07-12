@@ -179,6 +179,12 @@ M.config = {
 				{
 					desc = "Telescope current buffer fuzz find",
 					cmd = "<CMD>Telescope current_buffer_fuzzy_find<CR>"
+				},
+				{
+					desc = "Code Action",
+					cmd = function()
+						vim.lsp.buf.code_action()
+					end
 				}
 			})
 		end
