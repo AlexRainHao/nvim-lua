@@ -58,6 +58,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.notify("Failed to configure autocomplete: " .. tostring(err), vim.log.levels.ERROR)
       end
     end
+
+    local ok, err = pcall(require("lsp.keymaps").setup, event.buf)
+    if not ok then
+      vim.notify("Failed to setup LSP keymaps: " .. tostring(err), vim.log.levels.ERROR)
+    end
   end
 })
 
@@ -65,7 +70,26 @@ require("lsp.servers.python").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "pyright"
+    "lua_ls",
+    "pyright",
+    "ruff",
   },
   automatic_enable = true,
+})
+
+-- format
+local formatter_filetypes = {
+  python = true,
+  lua = true,
+}
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    if formatter_filetypes[vim.bo.filetype] then
+      local lineno = vim.api.nvim_win_get_cursor(0)
+      vim.lsp.buf.format({ async = false })
+      pcall(vim.api.nvim_win_set_cursor, 0, lineno)
+    end
+  end,
 })

@@ -48,10 +48,28 @@ M.config = {
         }
       })
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", },
         automatic_installation = true,
       })
     end
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {}
+  },
+  {
+    "b0o/schemastore.nvim"
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("lsp_signature").setup({
+        bind = true,
+        handler_opts = {
+          border = "rounded"
+        },
+      })
+    end,
   }
 }
 
