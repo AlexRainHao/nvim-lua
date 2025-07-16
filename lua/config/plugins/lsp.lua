@@ -118,6 +118,7 @@ M.configfunc = function()
       {
         { name = "nvim_lsp" },
         { name = "buffer" },
+        { name = "ultisnips" },
       },
       {
         { name = "path" },
