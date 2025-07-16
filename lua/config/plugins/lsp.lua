@@ -8,6 +8,7 @@ local M = {}
 M.config = {
   {
     "hrsh7th/nvim-cmp",
+    after = "SirVer/ultisnips",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-buffer",
@@ -82,8 +83,9 @@ M.configfunc = function()
     preselect = cmp.PreselectMode.None,
     snippet = {
       expand = function(args)
+        -- luasnip.lsp_expand(args.body)
         vim.fn["UltiSnips#Anon"](args.body)
-      end
+      end,
     },
     window = {
       completion = {

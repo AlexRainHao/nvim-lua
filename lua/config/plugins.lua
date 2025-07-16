@@ -39,4 +39,5 @@ require("lazy").setup({
   require("config.plugins.search"),
   require("config.plugins.lsp").config,
   require("config.plugins.flash"),
+  require("config.plugins.markdown"),
 })
