@@ -109,9 +109,9 @@ return {
         },
         keys = {
             { "t", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+            { "e", mode = { "n", "o" },      function() require("flash").remote() end,            desc = "Remote Flash" },
             { "T", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-            { "s", mode = { "n", "o" },      function() require("flash").remote() end,            desc = "Remote Flash" },
-            { "S", mode = { "o", "x", "n" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "E", mode = { "o", "x", "n" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
         },
     }
 }
