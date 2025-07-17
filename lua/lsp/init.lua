@@ -68,13 +68,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
+require("lsp.servers.typescript")
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
     "pyright",
     "ruff",
-    "marksman"
+    "marksman",
+    "biome",
+    "ts_ls",
+    "eslint",
   },
   automatic_enable = true,
 })
