@@ -131,8 +131,8 @@ M.configfunc = function()
       ["<c-n>"] = cmp.config.disable,
       ["<c-p>"] = cmp.config.disable,
       ["<c-m>"] = cmp.mapping.complete(),
-      ["<c-j>"] = cmp.mapping.select_next_item(),
-      ["<c-k>"] = cmp.mapping.select_prev_item(),
+      ["<c-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }, { "i" }),
+      ["<c-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }, { "i" }),
       ["<c-[>"] = cmp.mapping({
         i = function(fallback)
           cmp.close()
