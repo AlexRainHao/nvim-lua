@@ -66,10 +66,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+require("lsp.servers.misc").setup()
 require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
-require("lua.lsp.servers.typescript").setup()
-require("lsp.servers.misc").setup()
+require("lsp.servers.typescript").setup()
+require("lsp.servers.web").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -83,6 +84,9 @@ require("mason-lspconfig").setup({
     "jsonls",
     "yamlls",
     "taplo",
+    'html',
+    "cssls",
+    "tailwindcss",
   },
   automatic_enable = true,
 })
