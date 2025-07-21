@@ -71,7 +71,16 @@ M.config = {
         },
       })
     end,
-  }
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies = { "mason.nvim", "nvimtools/none-ls.nvim" },
+  },
+
+  {
+    "nvimtools/none-ls.nvim", -- successor to null-ls
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 }
 
 M.configfunc = function()

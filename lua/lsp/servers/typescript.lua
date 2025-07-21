@@ -70,9 +70,9 @@ function M.setup()
   })
 
   -- Enable the servers
-  -- vim.lsp.enable('ts_ls')
-  -- vim.lsp.enable('biome')
-  -- vim.lsp.enable('eslint')
+  vim.lsp.enable('ts_ls')
+  vim.lsp.enable('biome')
+  vim.lsp.enable('eslint')
 end
 
 return M
