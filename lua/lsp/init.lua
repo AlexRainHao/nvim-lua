@@ -68,7 +68,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
-require("lsp.servers.typescript")
+require("lsp.servers.typescript").setup()
+require("lsp.servers.misc").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -79,6 +80,9 @@ require("mason-lspconfig").setup({
     "biome",
     "ts_ls",
     "eslint",
+    "jsonls",
+    "yamlls",
+    "taplo",
   },
   automatic_enable = true,
 })
