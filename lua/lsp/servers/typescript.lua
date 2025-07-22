@@ -20,6 +20,16 @@ function M.setup()
       -- Disable semantic tokens
       client.server_capabilities.semanticTokensProvider = nil
     end,
+
+    on_new_config = function(new_config, new_root_dir)
+      new_config.init_options = new_config.init_options or {}
+      new_config.init_options.plugins = new_config.init_options.plugins or {}
+      table.insert(new_config.init_options.plugins, {
+        name = "@vue/typescript-plugin",
+        location = new_root_dir .. "/node_modules/@vue/typescript-plugin",
+        languages = { "vue" }
+      })
+    end
   })
 
   -- Biome Language Server

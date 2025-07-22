@@ -71,6 +71,7 @@ require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
 require("lsp.servers.typescript").setup()
 require("lsp.servers.web").setup()
+require("lsp.servers.vue").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -87,6 +88,7 @@ require("mason-lspconfig").setup({
     'html',
     "cssls",
     "tailwindcss",
+    "vue_ls",
   },
   automatic_enable = true,
 })
