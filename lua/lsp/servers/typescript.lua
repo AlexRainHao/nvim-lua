@@ -42,7 +42,7 @@ function M.setup()
   -- ESLint Language Server
   vim.lsp.config('eslint', {
     cmd = { 'vscode-eslint-language-server', '--stdio' },
-    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', "vue" },
     root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.cjs', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json', 'eslint.config.js', 'package.json', '.git' },
     settings = {
       codeAction = {
