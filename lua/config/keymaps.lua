@@ -27,8 +27,8 @@ local mappings = {
 	{ from = "<Leader><left>",  to = ":vertical resize -5<CR>" },
 	{ from = "<Leader><right>", to = ":vertical resize +5<CR>" },
 
-	{ from = "<c-s>\\",         to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
-	{ from = "<c-s>\"",         to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
+	{ from = "<leader>\\",         to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
+	{ from = "<leader>;",         to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
 	{ from = "<c-s>v",          to = "<C-w>b<C-w>K", },
 	{ from = "<c-s>h",          to = "<C-w>b<C-w>H", },
 

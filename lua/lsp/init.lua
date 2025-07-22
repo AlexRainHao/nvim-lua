@@ -72,6 +72,7 @@ require("lsp.servers.markdown").setup()
 require("lsp.servers.typescript").setup()
 require("lsp.servers.web").setup()
 require("lsp.servers.vue").setup()
+require("lsp.servers.go").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -89,6 +90,7 @@ require("mason-lspconfig").setup({
     "cssls",
     "tailwindcss",
     "vue_ls",
+    "gopls",
   },
   automatic_enable = true,
 })

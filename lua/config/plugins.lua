@@ -41,4 +41,6 @@ require("lazy").setup({
   require("config.plugins.flash"),
   require("config.plugins.snippets"),
   require("config.plugins.markdown"),
+  require("config.plugins.yazi"),
+	require("config.plugins.go"),
 })
