@@ -66,8 +66,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+require("lsp.servers.misc").setup()
 require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
+require("lsp.servers.typescript").setup()
+require("lsp.servers.web").setup()
+require("lsp.servers.vue").setup()
 require("lsp.servers.go").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
@@ -76,10 +80,69 @@ require("mason-lspconfig").setup({
     "pyright",
     "ruff",
     "marksman",
+    "biome",
+    "ts_ls",
+    "eslint",
+    "jsonls",
+    "yamlls",
+    "taplo",
+    'html',
+    "cssls",
+    "tailwindcss",
+    "vue_ls",
     "gopls",
   },
   automatic_enable = true,
 })
+
+require("mason-null-ls").setup({
+  ensure_installed = {
+    "prettierd", -- This will install prettier
+  },
+  automatic_installation = true,
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    -- Prettier formatter
+    null_ls.builtins.formatting.prettierd.with({
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "css",
+        "scss",
+        "less",
+        "html",
+        "json",
+        "jsonc",
+        "yaml",
+        "markdown",
+        "graphql",
+      },
+      condition = function(utils)
+        return utils.root_has_file({
+          ".prettierrc",
+          ".prettierrc.json",
+          ".prettierrc.js",
+          ".prettierrc.cjs",
+          ".prettierrc.mjs",
+          ".prettierrc.yml",
+          ".prettierrc.yaml",
+          ".prettierrc.toml",
+          "prettier.config.js",
+          "prettier.config.cjs",
+          "prettier.config.mjs",
+          "package.json", -- Also check package.json for prettier config
+        }) or utils.root_has_file({ "package.json" }) and utils.has_package_json_key("prettier")
+      end,
+    }),
+  },
+})
+
 
 -- format
 local formatter_filetypes = {
