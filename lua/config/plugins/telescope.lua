@@ -114,6 +114,9 @@ M.config = {
 					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 				},
 				pickers = {
+					find_files = {
+						hidden = true,
+					},
 					buffers = {
 						show_all_buffers = true,
 						sort_lastused = true,

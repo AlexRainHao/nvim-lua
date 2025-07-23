@@ -67,6 +67,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require("lsp.servers.misc").setup()
+require("lsp.servers.lua").setup()
 require("lsp.servers.python").setup()
 require("lsp.servers.markdown").setup()
 require("lsp.servers.typescript").setup()
@@ -97,7 +98,8 @@ require("mason-lspconfig").setup({
 
 require("mason-null-ls").setup({
   ensure_installed = {
-    "prettierd", -- This will install prettier
+    "prettierd",
+		"markdownlint",
   },
   automatic_installation = true,
 })
@@ -140,14 +142,27 @@ null_ls.setup({
         }) or utils.root_has_file({ "package.json" }) and utils.has_package_json_key("prettier")
       end,
     }),
+		null_ls.builtins.formatting.markdownlint,
   },
 })
 
 
--- format
+-- format on save
 local formatter_filetypes = {
+	json = true,
+	jsonc = true,
+	yaml = true,
+	toml = true,
+	markdown = true,
   python = true,
+	go = true,
   lua = true,
+	html = true,
+	css = true,
+	javascript = true,
+	typescript = true,
+	typescriptreact = true,
+	vue = true,
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
