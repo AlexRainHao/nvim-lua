@@ -31,6 +31,7 @@ M.config = {
       vim.keymap.set('n', '<c-b>', builtin.buffers, mode_m)
       vim.keymap.set('n', '<leader><c-p>', builtin.oldfiles, mode_m)
       vim.keymap.set('n', 'z=', builtin.spell_suggest, mode_m)
+      vim.keymap.set('n', '<leader><c-o>', builtin.lsp_document_symbols, {})
 
       vim.keymap.set('n', '<leader>D', function()
         builtin.diagnostics({
@@ -174,6 +175,12 @@ M.config = {
         {
           desc = 'Telescope builtin commands',
           cmd = '<CMD>Telescope commands<CR>',
+        },
+        {
+          desc = 'Search symbols',
+          cmd = function()
+            require('telescope.builtin').lsp_document_symbols()
+          end,
         },
         {
           desc = 'Telescope keymaps',
