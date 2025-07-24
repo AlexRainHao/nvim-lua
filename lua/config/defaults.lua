@@ -12,7 +12,7 @@ vim.o.shiftwidth = 2
 vim.o.autoindent = true
 vim.o.indentexpr = ""
 vim.o.list = true
-vim.o.listchars = 'tab:|\\ ,trail:▫,precedes:«,extends:»'
+vim.o.listchars = "tab:|\\ ,trail:▫,precedes:«,extends:»"
 vim.o.scrolloff = 4
 vim.o.timeoutlen = 0
 vim.o.timeout = false
@@ -28,11 +28,11 @@ vim.o.splitbelow = true
 vim.o.showmode = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.shortmess = vim.o.shortmess .. 'ca'
+vim.o.shortmess = vim.o.shortmess .. "ca"
 vim.o.inccommand = "split"
 vim.o.completeopt = "menuone,noinsert,noselect,preview"
 if vim.fn.has("nvim-0.11") == 1 then
-    vim.opt.completeopt:append("fuzzy")
+  vim.opt.completeopt:append("fuzzy")
 end
 vim.o.colorcolumn = "80"
 vim.o.virtualedit = "block"

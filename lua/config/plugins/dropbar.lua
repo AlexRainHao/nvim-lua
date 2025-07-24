@@ -7,9 +7,9 @@ return {
   config = function()
     local api = require("dropbar.api")
 
-    vim.keymap.set('n', '<Leader>c', api.pick)
-    vim.keymap.set('n', '[c', api.goto_context_start)
-    vim.keymap.set('n', ']c', api.select_next_context)
+    vim.keymap.set("n", "<Leader>c", api.pick)
+    vim.keymap.set("n", "[c", api.goto_context_start)
+    vim.keymap.set("n", "]c", api.select_next_context)
 
     local confirm = function()
       local menu = api.get_current_dropbar_menu()
@@ -43,7 +43,7 @@ return {
         preview = true,
 
         keymaps = {
-          ['<LeftMouse>'] = function()
+          ["<LeftMouse>"] = function()
             local menu = api.get_current_dropbar_menu()
 
             if not menu then
@@ -66,14 +66,14 @@ return {
               return
             end
 
-            menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
+            menu:click_at({ mouse.line, mouse.column }, nil, 1, "l")
           end,
-          ['<CR>'] = confirm,
-          ['i'] = confirm,
-          ['<esc>'] = quit_curr,
-          ['q'] = quit_curr,
-          ['n'] = quit_curr,
-          ['<MouseMove>'] = function()
+          ["<CR>"] = confirm,
+          ["i"] = confirm,
+          ["<esc>"] = quit_curr,
+          ["q"] = quit_curr,
+          ["n"] = quit_curr,
+          ["<MouseMove>"] = function()
             local menu = api.get_current_dropbar_menu()
 
             if not menu then
@@ -91,5 +91,5 @@ return {
         },
       },
     })
-  end
+  end,
 }

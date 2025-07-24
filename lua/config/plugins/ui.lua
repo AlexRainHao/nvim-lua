@@ -12,13 +12,13 @@ local theme_config = {
     "navarasu/onedark.nvim",
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require('onedark').setup {
-        style = 'warm'
-      }
+      require("onedark").setup({
+        style = "warm",
+      })
       -- Enable theme
-      require('onedark').load()
-    end
-  }
+      require("onedark").load()
+    end,
+  },
 }
 
 function determine_teme()
@@ -35,7 +35,7 @@ local M = {}
 
 M.config = {
   { "nvim-tree/nvim-web-devicons", opts = {} },
-	{ "nvim-zh/colorful-winsep.nvim", config = true, event = { "WinNew" } },
+  { "nvim-zh/colorful-winsep.nvim", config = true, event = { "WinNew" } },
   determine_teme(),
 }
 

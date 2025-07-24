@@ -1,4 +1,4 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("*", {
   capabilities = capabilities,
@@ -13,7 +13,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.ERROR] = "✘",
       [vim.diagnostic.severity.WARN] = "▲",
       [vim.diagnostic.severity.HINT] = "⚑",
-      [vim.diagnostic.severity.INFO] = "»"
+      [vim.diagnostic.severity.INFO] = "»",
     },
   },
   update_in_insert = false,
@@ -35,19 +35,19 @@ vim.api.nvim_create_autocmd("CursorHold", {
         "BufLeave",
         "CursorMoved",
         "InsertEnter",
-        "FocusLost"
+        "FocusLost",
       },
       border = "none", -- Changed from "rounded" to "none"
       source = "if_many",
       prefix = "",
     })
-  end
+  end,
 })
 
 -- Set up LspAttach autocmd for per-buffer configuration
 local autocomplete_configured = false
-vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'LSP actions',
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP actions",
   callback = function(event)
     -- Configure autocomplete once (not per buffer)
     if not autocomplete_configured then
@@ -55,15 +55,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
       if ok then
         autocomplete_configured = true
       else
-        vim.notify("Failed to configure autocomplete: " .. tostring(err), vim.log.levels.ERROR)
+        vim.notify(
+          "Failed to configure autocomplete: " .. tostring(err),
+          vim.log.levels.ERROR
+        )
       end
     end
 
     local ok, err = pcall(require("lsp.keymaps").setup, event.buf)
     if not ok then
-      vim.notify("Failed to setup LSP keymaps: " .. tostring(err), vim.log.levels.ERROR)
+      vim.notify(
+        "Failed to setup LSP keymaps: " .. tostring(err),
+        vim.log.levels.ERROR
+      )
     end
-  end
+  end,
 })
 
 require("lsp.servers.misc").setup()
@@ -87,7 +93,7 @@ require("mason-lspconfig").setup({
     "jsonls",
     "yamlls",
     "taplo",
-    'html',
+    "html",
     "cssls",
     "tailwindcss",
     "vue_ls",
@@ -99,7 +105,7 @@ require("mason-lspconfig").setup({
 require("mason-null-ls").setup({
   ensure_installed = {
     "prettierd",
-		"markdownlint",
+    "markdownlint",
   },
   automatic_installation = true,
 })
@@ -139,30 +145,31 @@ null_ls.setup({
           "prettier.config.cjs",
           "prettier.config.mjs",
           "package.json", -- Also check package.json for prettier config
-        }) or utils.root_has_file({ "package.json" }) and utils.has_package_json_key("prettier")
+        }) or utils.root_has_file({ "package.json" }) and utils.has_package_json_key(
+          "prettier"
+        )
       end,
     }),
-		null_ls.builtins.formatting.markdownlint,
+    null_ls.builtins.formatting.markdownlint,
   },
 })
 
-
 -- format on save
 local formatter_filetypes = {
-	json = true,
-	jsonc = true,
-	yaml = true,
-	toml = true,
-	markdown = true,
+  json = true,
+  jsonc = true,
+  yaml = true,
+  toml = true,
+  markdown = true,
   python = true,
-	go = true,
+  go = true,
   lua = true,
-	html = true,
-	css = true,
-	javascript = true,
-	typescript = true,
-	typescriptreact = true,
-	vue = true,
+  html = true,
+  css = true,
+  javascript = true,
+  typescript = true,
+  typescriptreact = true,
+  vue = true,
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
