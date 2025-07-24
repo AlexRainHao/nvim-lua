@@ -24,16 +24,31 @@ return {
     "MagicDuck/grug-far.nvim",
     keys = {
       {
-        "<leader>F",
+        "<leader>f",
         mode = "n",
         function()
           vim.cmd(":GrugFar")
         end,
         desc = "Project find and replace",
       },
+      {
+        "<leader>F",
+        mode = "n",
+        function()
+          require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
+        end,
+        desc = "Project find and replace within current file",
+      },
+      {
+        "<leader>vf",
+        mode = { "n", "x" },
+        function()
+          require("grug-far").open({
+            visualSelectionUsage = "operate-within-range",
+          })
+        end,
+        desc = "Project find and replace within in visual block",
+      },
     },
-    config = function()
-      require("grug-far").setup({})
-    end,
   },
 }
