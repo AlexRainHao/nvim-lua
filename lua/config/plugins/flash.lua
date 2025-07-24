@@ -1,9 +1,9 @@
 return {
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
+    'folke/flash.nvim',
+    event = 'VeryLazy',
     opts = {
-      labels = "asdfghjklqwertyuiopzxcvbnm",
+      labels = 'asdfghjklqwertyuiopzxcvbnm',
       search = {
         -- search/jump in all windows
         multi_window = true,
@@ -15,11 +15,11 @@ return {
         -- * exact: exact match
         -- * search: regular search
         -- * fuzzy: fuzzy search
-        mode = "fuzzy",
+        mode = 'fuzzy',
       },
       jump = {
         jumplist = true,
-        pos = "start", ---@type "start" | "end" | "range"
+        pos = 'start', ---@type "start" | "end" | "range"
         history = false,
         register = false,
         nohlsearch = false,
@@ -28,17 +28,17 @@ return {
       },
       label = {
         uppercase = false,
-        exclude = "",
+        exclude = '',
         current = false,
         -- show the label after the match
         after = true, ---@type boolean|number[]
         -- show the label before the match
         before = false, ---@type boolean|number[]
         -- position of the label extmark
-        style = "inline", ---@type "eol" | "overlay" | "right_align" | "inline"
+        style = 'inline', ---@type "eol" | "overlay" | "right_align" | "inline"
         -- flash tries to re-use labels that were already assigned to a position,
         -- when typing more characters. By default only lower-case labels are re-used.
-        reuse = "all", ---@type "lowercase" | "all"
+        reuse = 'all', ---@type "lowercase" | "all"
         -- for the current window, label targets closer to the cursor first
         distance = true,
         -- minimum pattern length to show labels
@@ -74,20 +74,20 @@ return {
           enabled = false,
         },
         treesitter = {
-          labels = "asdfghjklqwertyuiopzxcvbnm",
-          jump = { pos = "range" },
+          labels = 'asdfghjklqwertyuiopzxcvbnm',
+          jump = { pos = 'range' },
           search = { incremental = false },
-          label = { before = true, after = true, style = "inline" },
+          label = { before = true, after = true, style = 'inline' },
           highlight = {
             backdrop = false,
             matches = false,
           },
         },
         treesitter_search = {
-          jump = { pos = "range" },
+          jump = { pos = 'range' },
           search = { multi_window = true, wrap = true, incremental = false },
           remote_op = { restore = true },
-          label = { before = true, after = true, style = "inline" },
+          label = { before = true, after = true, style = 'inline' },
         },
         -- options used for remote flash
         remote = {
@@ -96,9 +96,9 @@ return {
       },
       prompt = {
         enabled = true,
-        prefix = { { "⚡", "FlashPromptIcon" } },
+        prefix = { { '⚡', 'FlashPromptIcon' } },
         win_config = {
-          relative = "editor",
+          relative = 'editor',
           width = 1, -- when <=1 it's a percentage of the editor width
           height = 1,
           row = -1, -- when negative it's an offset from the bottom
@@ -109,36 +109,36 @@ return {
     },
     keys = {
       {
-        "t",
-        mode = { "n", "x", "o" },
+        't',
+        mode = { 'n', 'x', 'o' },
         function()
-          require("flash").jump()
+          require('flash').jump()
         end,
-        desc = "Flash",
+        desc = 'Flash',
       },
       {
-        "e",
-        mode = { "n", "o" },
+        'e',
+        mode = { 'n', 'o' },
         function()
-          require("flash").remote()
+          require('flash').remote()
         end,
-        desc = "Remote Flash",
+        desc = 'Remote Flash',
       },
       {
-        "T",
-        mode = { "n", "x", "o" },
+        'T',
+        mode = { 'n', 'x', 'o' },
         function()
-          require("flash").treesitter()
+          require('flash').treesitter()
         end,
-        desc = "Flash Treesitter",
+        desc = 'Flash Treesitter',
       },
       {
-        "E",
-        mode = { "o", "x", "n" },
+        'E',
+        mode = { 'o', 'x', 'n' },
         function()
-          require("flash").treesitter_search()
+          require('flash').treesitter_search()
         end,
-        desc = "Treesitter Search",
+        desc = 'Treesitter Search',
       },
     },
   },

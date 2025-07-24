@@ -4,7 +4,7 @@ local has_words_before = function()
     and vim.api
         .nvim_buf_get_lines(0, line - 1, line, true)[1]
         :sub(col, col)
-        :match("%s")
+        :match('%s')
       == nil
 end
 
@@ -12,93 +12,93 @@ local M = {}
 
 M.config = {
   {
-    "hrsh7th/nvim-cmp",
-    after = "SirVer/ultisnips",
-    event = { "InsertEnter", "CmdlineEnter" },
+    'hrsh7th/nvim-cmp',
+    after = 'SirVer/ultisnips',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-calc",
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-calc',
       {
-        "onsails/lspkind.nvim",
+        'onsails/lspkind.nvim',
         lazy = false,
         config = function()
-          require("lspkind").init()
+          require('lspkind').init()
         end,
       },
       {
-        "quangnguyen30192/cmp-nvim-ultisnips",
+        'quangnguyen30192/cmp-nvim-ultisnips',
         config = function()
           -- optional call to setup (see customization section)
-          require("cmp_nvim_ultisnips").setup({})
+          require('cmp_nvim_ultisnips').setup({})
         end,
       },
     },
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    'williamboman/mason-lspconfig.nvim',
     lazy = false,
     dependencies = {
-      { "williamboman/mason.nvim", build = ":MasonUpdate" },
+      { 'williamboman/mason.nvim', build = ':MasonUpdate' },
     },
     config = function()
-      require("mason").setup({
+      require('mason').setup({
         ui = {
           icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
+            package_installed = '✓',
+            package_pending = '➜',
+            package_uninstalled = '✗',
           },
         },
       })
-      require("mason-lspconfig").setup({
+      require('mason-lspconfig').setup({
         automatic_installation = true,
       })
     end,
   },
   {
-    "j-hui/fidget.nvim",
+    'j-hui/fidget.nvim',
     opts = {},
   },
   {
-    "b0o/schemastore.nvim",
+    'b0o/schemastore.nvim',
   },
   {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
+    'ray-x/lsp_signature.nvim',
+    event = 'VeryLazy',
     config = function()
-      require("lsp_signature").setup({
+      require('lsp_signature').setup({
         bind = true,
         handler_opts = {
-          border = "rounded",
+          border = 'rounded',
         },
       })
     end,
   },
   {
-    "jay-babu/mason-null-ls.nvim",
-    dependencies = { "mason.nvim", "nvimtools/none-ls.nvim" },
+    'jay-babu/mason-null-ls.nvim',
+    dependencies = { 'mason.nvim', 'nvimtools/none-ls.nvim' },
   },
 
   {
-    "nvimtools/none-ls.nvim", -- successor to null-ls
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'nvimtools/none-ls.nvim', -- successor to null-ls
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 }
 
 M.configfunc = function()
-  local lspkind = require("lspkind")
-  local cmp = require("cmp")
-  local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+  local lspkind = require('lspkind')
+  local cmp = require('cmp')
+  local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
 
   cmp.setup({
     preselect = cmp.PreselectMode.None,
     snippet = {
       expand = function(args)
         -- luasnip.lsp_expand(args.body)
-        vim.fn["UltiSnips#Anon"](args.body)
+        vim.fn['UltiSnips#Anon'](args.body)
       end,
     },
     window = {
@@ -109,64 +109,64 @@ M.configfunc = function()
       documentation = cmp.config.window.bordered(),
     },
     formatting = {
-      fields = { "kind", "abbr", "menu" },
+      fields = { 'kind', 'abbr', 'menu' },
       maxwidth = 60,
       maxheight = 10,
       format = function(entry, vim_item)
         local kind = lspkind.cmp_format({
-          mode = "symbol_text",
+          mode = 'symbol_text',
           symbol_map = {
-            Codeium = "",
-            TypeParameter = "",
+            Codeium = '',
+            TypeParameter = '',
           },
         })(entry, vim_item)
 
-        local strings = vim.split(kind.kind, "%s", { trimempty = true })
-        kind.kind = " " .. (strings[1] or "") .. " "
-        kind.menu = "    (" .. (strings[2] or "") .. ")"
+        local strings = vim.split(kind.kind, '%s', { trimempty = true })
+        kind.kind = ' ' .. (strings[1] or '') .. ' '
+        kind.menu = '    (' .. (strings[2] or '') .. ')'
 
         return kind
       end,
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      { name = "buffer" },
-      { name = "ultisnips" },
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+      { name = 'ultisnips' },
     }, {
-      { name = "path" },
-      { name = "nvim_lua" },
-      { name = "calc" },
+      { name = 'path' },
+      { name = 'nvim_lua' },
+      { name = 'calc' },
     }),
     mapping = cmp.mapping.preset.insert({
-      ["<c-e>"] = cmp.config.disable,
-      ["<c-n>"] = cmp.config.disable,
-      ["<c-p>"] = cmp.config.disable,
-      ["<c-m>"] = cmp.mapping.complete(),
-      ["<c-j>"] = cmp.mapping.select_next_item(
+      ['<c-e>'] = cmp.config.disable,
+      ['<c-n>'] = cmp.config.disable,
+      ['<c-p>'] = cmp.config.disable,
+      ['<c-m>'] = cmp.mapping.complete(),
+      ['<c-j>'] = cmp.mapping.select_next_item(
         { behavior = cmp.SelectBehavior.Select },
-        { "i" }
+        { 'i' }
       ),
-      ["<c-k>"] = cmp.mapping.select_prev_item(
+      ['<c-k>'] = cmp.mapping.select_prev_item(
         { behavior = cmp.SelectBehavior.Select },
-        { "i" }
+        { 'i' }
       ),
-      ["<c-[>"] = cmp.mapping({
+      ['<c-[>'] = cmp.mapping({
         i = function(fallback)
           cmp.close()
           fallback()
         end,
       }),
-      ["<c-y>"] = cmp.mapping({
+      ['<c-y>'] = cmp.mapping({
         i = function(fallback)
           fallback()
         end,
       }),
-      ["<c-u>"] = cmp.mapping({
+      ['<c-u>'] = cmp.mapping({
         i = function(fallback)
           fallback()
         end,
       }),
-      ["<CR>"] = cmp.mapping({
+      ['<CR>'] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() then
             cmp.confirm({
@@ -178,7 +178,7 @@ M.configfunc = function()
           end
         end,
       }),
-      ["<Tab>"] = cmp.mapping({
+      ['<Tab>'] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
@@ -189,7 +189,7 @@ M.configfunc = function()
           end
         end,
       }),
-      ["<S-Tab>"] = cmp.mapping({
+      ['<S-Tab>'] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() then
             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })

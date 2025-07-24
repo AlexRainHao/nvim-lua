@@ -1,8 +1,8 @@
-require("config.defaults")
-require("config.keymaps")
-require("config.backup")
-require("config.plugins")
+require('config.defaults')
+require('config.keymaps')
+require('config.backup')
+require('config.plugins')
 
-require("specific")
+require('specific')
 
-require("lsp")
+require('lsp')

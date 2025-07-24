@@ -1,15 +1,15 @@
 return {
-  "Bekaboo/dropbar.nvim",
+  'Bekaboo/dropbar.nvim',
   dependencies = {
     -- icon
-    "nvim-tree/nvim-web-devicons",
+    'nvim-tree/nvim-web-devicons',
   },
   config = function()
-    local api = require("dropbar.api")
+    local api = require('dropbar.api')
 
-    vim.keymap.set("n", "<Leader>c", api.pick)
-    vim.keymap.set("n", "[c", api.goto_context_start)
-    vim.keymap.set("n", "]c", api.select_next_context)
+    vim.keymap.set('n', '<Leader>c', api.pick)
+    vim.keymap.set('n', '[c', api.goto_context_start)
+    vim.keymap.set('n', ']c', api.select_next_context)
 
     local confirm = function()
       local menu = api.get_current_dropbar_menu()
@@ -35,7 +35,7 @@ return {
       end
     end
 
-    require("dropbar").setup({
+    require('dropbar').setup({
       menu = {
         -- When on, automatically set the cursor to the closest previous/next
         -- clickable component in the direction of cursor movement on CursorMoved
@@ -43,7 +43,7 @@ return {
         preview = true,
 
         keymaps = {
-          ["<LeftMouse>"] = function()
+          ['<LeftMouse>'] = function()
             local menu = api.get_current_dropbar_menu()
 
             if not menu then
@@ -66,14 +66,14 @@ return {
               return
             end
 
-            menu:click_at({ mouse.line, mouse.column }, nil, 1, "l")
+            menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
           end,
-          ["<CR>"] = confirm,
-          ["i"] = confirm,
-          ["<esc>"] = quit_curr,
-          ["q"] = quit_curr,
-          ["n"] = quit_curr,
-          ["<MouseMove>"] = function()
+          ['<CR>'] = confirm,
+          ['i'] = confirm,
+          ['<esc>'] = quit_curr,
+          ['q'] = quit_curr,
+          ['n'] = quit_curr,
+          ['<MouseMove>'] = function()
             local menu = api.get_current_dropbar_menu()
 
             if not menu then
