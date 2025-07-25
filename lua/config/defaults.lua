@@ -44,5 +44,5 @@ vim.o.updatetime = 1000
 vim.cmd([[autocmd TermOpen term://* startinsert]])
 vim.cmd([[
     tnoremap <C-[> <C-\><C-N>
-    tnoremap <C-D> <C-\><C-N><C-O>
 ]])
+-- tnoremap <C-D> <C-\><C-N><C-O>
