@@ -1,14 +1,17 @@
 return {
   {
-    'gcmt/wildfire.vim',
+    'SUSTech-data/wildfire.nvim',
     lazy = false,
-    keys = {
-      {
-        '<leader>s',
-        '<Plug>(wildfire-quick-select)',
-        desc = 'Wildfire quick select',
-      },
-    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('wildfire').setup({
+        keymaps = {
+          init_selection = '<c-n>',
+          node_incremental = '<c-n>',
+          ndoe_decremental = '<c-l>',
+        },
+      })
+    end,
   },
   {
     'windwp/nvim-autopairs',

@@ -32,7 +32,7 @@ vim.o.shortmess = vim.o.shortmess .. 'ca'
 vim.o.inccommand = 'split'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 if vim.fn.has('nvim-0.11') == 1 then
-	vim.opt.completeopt:append('fuzzy')
+  vim.opt.completeopt:append('fuzzy')
 end
 vim.o.colorcolumn = '80'
 vim.o.virtualedit = 'block'
