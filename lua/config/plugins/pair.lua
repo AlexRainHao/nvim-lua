@@ -18,7 +18,9 @@ return {
 
       npairs.setup()
 
-      npairs.add_rule(Rule('<', '>', {}))
+      npairs.add_rule(
+        Rule('<', '>', { 'html', 'vue', 'cpp', 'typescript', 'javascript' })
+      )
     end,
   },
   {

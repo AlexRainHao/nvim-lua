@@ -181,7 +181,9 @@ M.configfunc = function()
       ['<Tab>'] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            cmp.select_next_item({
+              behavior = cmp.SelectBehavior.Insert,
+            })
           elseif has_words_before() then
             cmp.complete()
           else
@@ -192,7 +194,9 @@ M.configfunc = function()
       ['<S-Tab>'] = cmp.mapping({
         i = function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+            cmp.select_prev_item({
+              behavior = cmp.SelectBehavior.Insert,
+            })
           else
             fallback()
           end

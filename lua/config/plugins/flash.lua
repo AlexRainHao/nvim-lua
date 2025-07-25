@@ -85,7 +85,11 @@ return {
         },
         treesitter_search = {
           jump = { pos = 'range' },
-          search = { multi_window = true, wrap = true, incremental = false },
+          search = {
+            multi_window = true,
+            wrap = true,
+            incremental = false,
+          },
           remote_op = { restore = true },
           label = { before = true, after = true, style = 'inline' },
         },

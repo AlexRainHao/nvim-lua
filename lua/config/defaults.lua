@@ -4,7 +4,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.cursorline = true
 vim.o.exrc = true
-vim.o.expandtab = false
+vim.o.expandtab = true
 vim.o.smarttab = true
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
@@ -32,7 +32,7 @@ vim.o.shortmess = vim.o.shortmess .. 'ca'
 vim.o.inccommand = 'split'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 if vim.fn.has('nvim-0.11') == 1 then
-  vim.opt.completeopt:append('fuzzy')
+	vim.opt.completeopt:append('fuzzy')
 end
 vim.o.colorcolumn = '80'
 vim.o.virtualedit = 'block'

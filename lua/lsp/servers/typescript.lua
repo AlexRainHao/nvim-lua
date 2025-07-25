@@ -10,7 +10,12 @@ function M.setup()
       'typescript',
       'typescriptreact',
     },
-    root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
+    root_markers = {
+      'package.json',
+      'tsconfig.json',
+      'jsconfig.json',
+      '.git',
+    },
     init_options = {
       preferences = {
         disableSuggestions = true,

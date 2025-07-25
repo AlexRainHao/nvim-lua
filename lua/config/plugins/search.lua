@@ -35,7 +35,9 @@ return {
         '<leader>FF',
         mode = 'n',
         function()
-          require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } })
+          require('grug-far').open({
+            prefills = { paths = vim.fn.expand('%') },
+          })
         end,
         desc = 'GRUG file',
       },
