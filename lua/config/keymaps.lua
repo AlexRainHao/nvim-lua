@@ -22,11 +22,10 @@ local mappings = {
   { from = '<left>', to = '<C-w>h' },
   { from = '<right>', to = '<C-w>l' },
 
-  { from = '<Leader><up>', to = ':res -5<CR>' },
-  { from = '<Leader><down>', to = ':res +5<CR>' },
-  { from = '<Leader><left>', to = ':vertical resize -5<CR>' },
-  { from = '<Leader><right>', to = ':vertical resize +5<CR>' },
-
+  { from = '<M-k>', to = ':res -5<CR>' },
+  { from = '<M-j>', to = ':res +5<CR>' },
+  { from = '<M-h>', to = ':vertical resize -5<CR>' },
+  { from = '<M-l>', to = ':vertical resize +5<CR>' },
   {
     from = '<leader>\\',
     to = ':set nosplitright<CR>:vsplit<CR>:set splitright<CR>',
