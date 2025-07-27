@@ -34,8 +34,66 @@ end
 local M = {}
 
 M.config = {
-  { 'nvim-tree/nvim-web-devicons', opts = {} },
+  { 'nvim-tree/nvim-web-devicons',  opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'rubiin/fortune.nvim' },
+    config = function()
+      local alpha = require('alpha')
+      local dashboard = require('alpha.themes.dashboard')
+
+      -- dashboard.section.header.val = {
+      --   '                                                     ',
+      --   '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+      --   '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+      --   '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+      --   '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+      --   '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+      --   '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+      --   '                                                     ',
+      dashboard.section.header.val = {
+        '                               ',
+        '                               ',
+        '       ▄▀▀▀▀▀▀▀▀▀▀▄▄          ',
+        '     ▄▀▀░░░░░░░░░░░░░▀▄        ',
+        '   ▄▀░░░░░░░░░░░░░░░░░░▀▄      ',
+        '   █░░░░░░░░░░░░░░░░░░░░░▀▄    ',
+        '  ▐▌░░░░░░░░▄▄▄▄▄▄▄░░░░░░░▐▌   ',
+        '  █░░░░░░░░░░░▄▄▄▄░░▀▀▀▀▀░░█   ',
+        ' ▐▌░░░░░░░▀▀▀▀░░░░░▀▀▀▀▀░░░▐▌  ',
+        ' █░░░░░░░░░▄▄▀▀▀▀▀░░░░▀▀▀▀▄░█  ',
+        ' █░░░░░░░░░░░░░░░░▀░░░▐░░░░░▐▌ ',
+        ' ▐▌░░░░░░░░░▐▀▀██▄░░░░░░▄▄▄░▐▌ ',
+        '  █░░░░░░░░░░░▀▀▀░░░░░░▀▀██░░█ ',
+        '  ▐▌░░░░▄░░░░░░░░░░░░░▌░░░░░░█ ',
+        '   ▐▌░░▐░░░░░░░░░░░░░░▀▄░░░░░█ ',
+        '    █░░░▌░░░░░░░░▐▀░░░░▄▀░░░▐▌ ',
+        '    ▐▌░░▀▄░░░░░░░░▀░▀░▀▀░░░▄▀  ',
+        '    ▐▌░░▐▀▄░░░░░░░░░░░░░░░░█   ',
+        '    ▐▌░░░▌░▀▄░░░░▀▀▀▀▀▀░░░█    ',
+        '    █░░░▀░░░░▀▄░░░░░░░░░░▄▀    ',
+        '   ▐▌░░░░░░░░░░▀▄░░░░░░▄▀      ',
+        '  ▄▀░░░▄▀░░░░░░░░▀▀▀▀█▀        ',
+        ' ▀░░░▄▀░░░░░░░░░░▀░░░▀▀▀▀▄▄▄▄▄ ',
+        '                               ',
+        '                               ',
+      }
+
+      dashboard.section.buttons.val = {
+        dashboard.button('e', '  New File    ', ':enew<CR>'),
+        dashboard.button('r', '  Recent      ', ':Telescope oldfiles<CR>'),
+        dashboard.button('c', '  NVIM Config ', ':e $MYVIMRC<CR>'),
+        dashboard.button('q', '󰩈  Quit        ', ':qa<CR>'),
+      }
+
+      dashboard.section.footer.val = require('config.plugins.cowsay').cowsays(
+        require('fortune').get_fortune()
+      )
+
+      alpha.setup(dashboard.opts)
+    end,
+  },
   determine_teme(),
 }
 
