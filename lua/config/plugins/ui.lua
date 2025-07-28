@@ -38,7 +38,11 @@ M.config = {
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
   {
     'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'rubiin/fortune.nvim' },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'rubiin/fortune.nvim',
+      'AlexRainHao/cowsay-fortune.nvim',
+    },
     config = function()
       local alpha = require('alpha')
       local dashboard = require('alpha.themes.dashboard')
@@ -83,9 +87,7 @@ M.config = {
         dashboard.button('q', '󰩈  Quit        ', ':qa<CR>'),
       }
 
-      dashboard.section.footer.val = require('config.plugins.cowsay').cowsays(
-        require('fortune').get_fortune()
-      )
+      dashboard.section.footer.val = require('cowsay-fortune').cowsays()
 
       alpha.setup(dashboard.opts)
     end,
