@@ -34,7 +34,7 @@ end
 local M = {}
 
 M.config = {
-  { 'nvim-tree/nvim-web-devicons',  opts = {} },
+  { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
   {
     'goolord/alpha-nvim',
