@@ -138,10 +138,9 @@ M.configfunc = function()
       { name = 'calc' },
     }),
     mapping = cmp.mapping.preset.insert({
-      ['<c-e>'] = cmp.config.disable,
       ['<c-n>'] = cmp.config.disable,
       ['<c-p>'] = cmp.config.disable,
-      ['<c-m>'] = cmp.mapping.complete(),
+      ['<c-e>'] = cmp.mapping.complete(),
       ['<c-j>'] = cmp.mapping.select_next_item(
         { behavior = cmp.SelectBehavior.Select },
         { 'i' }

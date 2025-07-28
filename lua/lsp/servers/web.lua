@@ -16,6 +16,21 @@ function M.setup()
     },
   })
 
+  -- Emmet Language Server
+  vim.lsp.config('emmet_language_server', {
+    cmd = { 'emmet-language-server', '--stdio' },
+    filetypes = {
+      'css',
+      'html',
+      'javascript',
+      'typescript',
+      'less',
+      'sass',
+      'scss',
+    },
+    root_markers = { 'package.json', '.git' },
+  })
+
   -- CSS Language Server
   vim.lsp.config('cssls', {
     cmd = { 'vscode-css-language-server', '--stdio' },
@@ -104,6 +119,7 @@ function M.setup()
 
   -- Enable the servers
   vim.lsp.enable('html')
+  vim.lsp.enable('emmet_language_server')
   vim.lsp.enable('cssls')
   vim.lsp.enable('tailwindcss')
 end

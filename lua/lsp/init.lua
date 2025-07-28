@@ -94,6 +94,7 @@ require('mason-lspconfig').setup({
     'yamlls',
     'taplo',
     'html',
+    'emmet_language_server',
     'cssls',
     'tailwindcss',
     'vue_ls',
