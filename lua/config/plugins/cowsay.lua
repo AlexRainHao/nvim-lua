@@ -33,10 +33,15 @@ local function concat_fortune(fortune)
 end
 
 -- Function to wrap a string to fit the specified width
-local function wrap_text(input, linewidth)
+local function wrap_text(input, linewidth, left)
+  if left == nil then
+    left = true
+  end
+
   local lines = {}
   local line_len = 0
   local line = ''
+
   for word in input:gmatch('[^%s]+') do
     if line_len + #word > linewidth then
       table.insert(lines, line)
@@ -48,9 +53,17 @@ local function wrap_text(input, linewidth)
     else
       line = line .. ' ' .. word
     end
+
+
     line_len = line_len + #word + 1
   end
+
+  if line_len < linewidth and not left then
+    line = string.rep(' ', linewidth - line_len) .. line
+  end
+
   table.insert(lines, line)
+
   return lines
 end
 
@@ -63,7 +76,7 @@ local function draw_rectangle(h_padding, v_padding, fortune)
 
   -- Wrap the first part of the quote
   local wrapped_quote = wrap_text(c_fortune[1], max_width - 2)
-  local wrapped_author = wrap_text(c_fortune[3], max_width - 2)
+  local wrapped_author = wrap_text(c_fortune[3], max_width - 2, false)
 
   -- Calculate the necessary width and height
   local width = max_width
@@ -117,7 +130,6 @@ local function draw_rectangle(h_padding, v_padding, fortune)
 end
 
 -- TODO: wrap into public libs
--- TODO: author right padding
 function M.cowsays(fortune)
   local r = table.concat(
     { draw_rectangle(2, 1, fortune),
