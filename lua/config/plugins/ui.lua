@@ -5,18 +5,18 @@ local theme_config = {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme everforest]])
+      require('everforest').load()
     end,
   },
   onedark = {
     'navarasu/onedark.nvim',
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      require('onedark').setup({
-        style = 'warm',
-      })
+      local onedark = require('onedark')
+
+      onedark.setup({ style = 'warm' })
       -- Enable theme
-      require('onedark').load()
+      onedark.load()
     end,
   },
 }
