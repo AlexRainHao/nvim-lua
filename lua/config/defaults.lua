@@ -46,3 +46,8 @@ vim.cmd([[
     tnoremap <C-[> <C-\><C-N>
 ]])
 -- tnoremap <C-D> <C-\><C-N><C-O>
+
+local os_name = vim.loop.os_uname().sysname
+if os_name == 'Darwin' or os_name == 'Linux' then
+  vim.opt.clipboard:append('unnamedplus')
+end
