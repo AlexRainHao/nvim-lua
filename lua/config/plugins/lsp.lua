@@ -81,10 +81,18 @@ M.config = {
     'jay-babu/mason-null-ls.nvim',
     dependencies = { 'mason.nvim', 'nvimtools/none-ls.nvim' },
   },
-
   {
     'nvimtools/none-ls.nvim', -- successor to null-ls
     dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
   },
 }
 

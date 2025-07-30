@@ -6,7 +6,7 @@ return {
       { 'kkharji/sqlite.lua', module = 'sqlite' },
     },
     config = function()
-      vim.keymap.set('n', '<c-y>', ':Telescope neoclip<CR>', { noremap = true })
+      vim.keymap.set('n', '<S-y>', ':Telescope neoclip<CR>', { noremap = true })
 
       require('neoclip').setup({
         history = 1000,
