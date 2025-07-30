@@ -19,6 +19,15 @@ local theme_config = {
       onedark.load()
     end,
   },
+  vitesse = {
+    '2nthony/vitesse.nvim',
+    dependencies = {
+      'tjdevries/colorbuddy.nvim',
+    },
+    config = function()
+      require('vitesse').load()
+    end,
+  },
 }
 
 function determine_teme()
