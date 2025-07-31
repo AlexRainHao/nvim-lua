@@ -11,7 +11,7 @@ return {
       fzf.grep({ search = '', fzf_opts = { ['--layout'] = 'default' } })
     end, mode_m)
 
-    vim.keymap.set('n', '<c-f>', function()
+    vim.keymap.set('x', '<c-f>', function()
       fzf.grep_visual({ fzf_opts = { ['--layout'] = 'default' } })
     end, mode_m)
 
@@ -27,6 +27,7 @@ return {
         preview = {
           wrap = true,
         },
+        hidden = 'nohidden',
       },
 
       keymap = {
