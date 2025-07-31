@@ -97,6 +97,35 @@ M.config = {
       },
     },
   },
+  {
+    'folke/trouble.nvim',
+    keys = {
+      {
+        '<NOP>',
+        '<cmd>Trouble diagnostics toggle<cr>',
+        desc = 'Toggle trouble',
+      },
+      {
+        '<NOP>',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Toggle buffer trouble',
+      },
+    },
+    cmd = 'Trouble',
+    opts = {
+      use_diagnostic_signs = true,
+      win = { position = 'right', size = 0.3 },
+      focus = true,
+      pinned = true,
+      keys = {
+        ['<esc>'] = 'close',
+        k = 'prev',
+        j = 'next',
+        ['<c-;>'] = 'jump_split',
+        ['<c-\\>'] = 'jump_vsplit',
+      },
+    },
+  },
 }
 
 M.configfunc = function()

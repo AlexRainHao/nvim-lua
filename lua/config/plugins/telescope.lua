@@ -36,7 +36,7 @@ M.config = {
         builtin.diagnostics({
           sort_by = 'severity',
         })
-      end, m)
+      end, mode_m)
 
       vim.lsp.protocol.DiagnosticSeverity = {
         'Error',
