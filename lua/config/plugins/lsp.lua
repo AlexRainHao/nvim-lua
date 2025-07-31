@@ -75,7 +75,7 @@ M.config = {
           border = 'rounded',
         },
       })
-      vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
+      vim.keymap.set({ 'n', 'i' }, '<c-k>', function()
         require('lsp_signature').toggle_float_win()
       end, { silent = true, noremap = true, desc = 'toggle signature' })
     end,

@@ -30,7 +30,7 @@ local theme_config = {
   },
 }
 
-function determine_teme()
+local function determine_teme()
   local _prefer_theme = require('specific').prefer_theme
 
   if not theme_config[_prefer_theme] then
@@ -103,6 +103,44 @@ M.config = {
     end,
   },
   determine_teme(),
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      local notify = require('notify')
+      vim.notify = notify
+
+      notify.setup({
+        render = 'compact',
+        stages = 'fade',
+        timeout = 3000,
+        top_down = true,
+      })
+
+      require('commander').add({
+        {
+          desc = 'Open Notifications',
+          cmd = function()
+            require('telescope').extensions.notify.notify({
+              layout_strategy = 'vertical',
+              wrap_results = true,
+              previewer = false,
+            })
+          end,
+        },
+        {
+          desc = 'Clear Notifications',
+          cmd = notify.clear_history,
+        },
+      })
+
+      vim.keymap.set(
+        'n',
+        '<leader>n;',
+        notify.dismiss,
+        { noremap = true, silent = true }
+      )
+    end,
+  },
 }
 
 return M

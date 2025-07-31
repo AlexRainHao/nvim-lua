@@ -34,7 +34,7 @@ vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 if vim.fn.has('nvim-0.11') == 1 then
   vim.opt.completeopt:append('fuzzy')
 end
-vim.o.colorcolumn = '80'
+vim.o.colorcolumn = '120'
 vim.o.virtualedit = 'block'
 vim.o.mouse = 'a'
 vim.o.updatetime = 1000
