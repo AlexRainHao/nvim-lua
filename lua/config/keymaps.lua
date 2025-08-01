@@ -34,8 +34,8 @@ local mappings = {
     from = '<leader>;',
     to = ':set nosplitbelow<CR>:split<CR>:set splitbelow<CR>',
   },
-  { from = '<c-s>v', to = '<C-w>b<C-w>K' },
-  { from = '<c-s>h', to = '<C-w>b<C-w>H' },
+  { from = '<leader>v', to = '<C-w>b<C-w>K' },
+  { from = '<leader>h', to = '<C-w>b<C-w>H' },
 
   { from = '<leader>q', to = '<C-w>j:q<CR>' },
 

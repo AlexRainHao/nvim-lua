@@ -126,6 +126,23 @@ M.config = {
       },
     },
   },
+  {
+    'simrat39/symbols-outline.nvim',
+    keys = {
+      {
+        '<c-s>',
+        function()
+          require('symbols-outline').toggle_outline()
+        end,
+        '<cmd>SymbolsOutline<cr>',
+        mode = 'n',
+        desc = 'Toggle symbols',
+      },
+    },
+    config = function()
+      require('symbols-outline').setup()
+    end,
+  },
 }
 
 M.configfunc = function()
