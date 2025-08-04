@@ -44,4 +44,5 @@ require('lazy').setup({
   require('config.plugins.markdown'),
   require('config.plugins.yazi'),
   require('config.plugins.go'),
+  require('config.plugins.session'),
 })
