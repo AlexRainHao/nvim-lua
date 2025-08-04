@@ -28,6 +28,7 @@ return {
           'toml',
           'markdown',
           'markdown_inline',
+          'rust',
         },
         highlight = {
           enable = true,

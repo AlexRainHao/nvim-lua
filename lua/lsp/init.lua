@@ -80,6 +80,7 @@ require('lsp.servers.typescript').setup()
 require('lsp.servers.web').setup()
 require('lsp.servers.vue').setup()
 require('lsp.servers.go').setup()
+require('lsp.servers.rust').setup()
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
@@ -99,6 +100,7 @@ require('mason-lspconfig').setup({
     'tailwindcss',
     'vue_ls',
     'gopls',
+    'rust_analyzer',
   },
   automatic_enable = true,
 })
