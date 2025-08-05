@@ -14,7 +14,7 @@ local mappings = {
   { from = 'v,', to = 'v$' },
 
   -- Movements
-  { from = ',.', to = '%', mode = mode_nv },
+  { from = ',.', to = '$', mode = mode_nv },
 
   -- Windows
   { from = '<up>', to = '<C-w>k' },
