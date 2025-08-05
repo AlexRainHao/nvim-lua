@@ -197,7 +197,13 @@ M.configfunc = function()
     mapping = cmp.mapping.preset.insert({
       ['<c-n>'] = cmp.config.disable,
       ['<c-p>'] = cmp.config.disable,
-      ['<c-e>'] = cmp.mapping.complete(),
+      ['<c-e>'] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.close()
+        else
+          cmp.complete()
+        end
+      end, { 'i' }),
       ['<c-j>'] = cmp.mapping.select_next_item(
         { behavior = cmp.SelectBehavior.Select },
         { 'i' }
