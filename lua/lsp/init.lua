@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
         'InsertEnter',
         'FocusLost',
       },
-      border = 'none', -- Changed from "rounded" to "none"
+      border = 'rounded', -- Changed from "rounded" to "none"
       source = 'if_many',
       prefix = '',
     })
@@ -173,6 +173,7 @@ local formatter_filetypes = {
   typescript = true,
   typescriptreact = true,
   vue = true,
+  rust = true,
 }
 
 vim.api.nvim_create_autocmd('BufWritePre', {

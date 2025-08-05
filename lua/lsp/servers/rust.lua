@@ -18,6 +18,11 @@ function M.setup()
           },
           prefix = 'self',
         },
+        check = {
+          command = 'clippy',
+          features = 'all',
+          allTargets = true,
+        },
         cargo = {
           buildScripts = {
             enable = true,
