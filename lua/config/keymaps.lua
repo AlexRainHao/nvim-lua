@@ -14,7 +14,7 @@ local mappings = {
   { from = 'v,', to = 'v$' },
 
   -- Movements
-  { from = ',.', to = '%', mode = mode_nv },
+  { from = ',.', to = '$', mode = mode_nv },
 
   -- Windows
   { from = '<up>', to = '<C-w>k' },
@@ -41,8 +41,8 @@ local mappings = {
 
   -- Tabs
   { from = 'tu', to = ':tabe<CR>' },
-  -- { from = "<C-[>",           to = ":tabp<CR>" },
-  -- { from = "<C-]>",           to = ":tabn<CR>" },
+  { from = '<M-[>', to = ':tabp<CR>' },
+  { from = '<M-]>', to = ':tabn<CR>' },
 }
 
 for _, mapping in ipairs(mappings) do
@@ -53,3 +53,11 @@ for _, mapping in ipairs(mappings) do
     { noremap = true }
   )
 end
+
+-- terminal
+-- enter `insert` mode when open terminal
+-- vim.cmd([[autocmd TermOpen term://* startinsert]])
+vim.cmd([[
+    tnoremap <ESC> <C-\><C-N>
+]])
+-- tnoremap <C-D> <C-\><C-N><C-O>

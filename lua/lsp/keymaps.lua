@@ -21,7 +21,7 @@ function M.setup(bufnr)
   -- vim.keymap.set('i', '<c-f>', vim.lsp.buf.signature_help, opts)
 
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  -- vim.keymap.set('n', '<leader>aw', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<c-,>', vim.lsp.buf.code_action, opts)
 
   -- formatting
   vim.keymap.set('n', '<leader>ff', function()

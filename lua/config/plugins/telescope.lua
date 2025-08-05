@@ -150,7 +150,12 @@ M.config = {
       'nvim-telescope/telescope.nvim',
     },
     keys = {
-      { '<leader>:', '<CMD>Telescope commander<CR>', mode = 'n' },
+      {
+        '<leader>:',
+        '<CMD>Telescope commander<CR>',
+        mode = 'n',
+        desc = 'Toggle commander',
+      },
     },
     config = function()
       local commander = require('commander')
