@@ -41,7 +41,7 @@ vim.o.updatetime = 1000
 
 -- terminal
 -- enter `insert` mode when open terminal
-vim.cmd([[autocmd TermOpen term://* startinsert]])
+-- vim.cmd([[autocmd TermOpen term://* startinsert]])
 vim.cmd([[
     tnoremap <C-[> <C-\><C-N>
 ]])

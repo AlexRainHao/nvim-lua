@@ -11,19 +11,19 @@ return {
             return vim.o.columns * 0.4
           end
         end,
-        open_mapping = [[<c-\>]],
+        open_mapping = [[<c-`>]],
         start_in_insert = false,
       })
     end,
     keys = {
       {
-        '<c-\\>',
+        '<c-`>',
         mode = 'n',
         ':TermNew<CR>',
         desc = 'Toggle or first new terminal',
       },
       {
-        '<leader>sn',
+        '<leader><c-`>',
         mode = 'n',
         ':TermNew<CR>',
         desc = 'New terminal',
