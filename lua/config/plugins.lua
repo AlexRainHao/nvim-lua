@@ -43,6 +43,7 @@ require('lazy').setup({
   require('config.plugins.snippets'),
   require('config.plugins.markdown'),
   require('config.plugins.yazi'),
+  require('config.plugins.python'),
   require('config.plugins.go'),
   require('config.plugins.session'),
   require('config.plugins.semicolon'),
