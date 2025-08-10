@@ -47,4 +47,5 @@ require('lazy').setup({
   require('config.plugins.go'),
   require('config.plugins.session'),
   require('config.plugins.semicolon'),
+  require('config.plugins.todo'),
 })
