@@ -26,6 +26,10 @@ function M.setup(bufnr)
   -- formatting
   vim.keymap.set('n', '<leader>ff', function()
     vim.lsp.buf.format({ async = true })
+    local gof = vim.api.nvim_buf_get_name(0)
+    if string.match(gof, '(.go)$') then
+      require('go.format').gofmt()
+    end
   end, opts)
 end
 

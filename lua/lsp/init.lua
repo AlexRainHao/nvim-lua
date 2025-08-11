@@ -109,6 +109,7 @@ require('mason-null-ls').setup({
   ensure_installed = {
     'prettierd',
     'markdownlint',
+    'golines',
   },
   automatic_installation = true,
 })
