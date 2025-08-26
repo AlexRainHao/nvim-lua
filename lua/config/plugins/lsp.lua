@@ -123,6 +123,7 @@ M.config = {
         j = 'next',
         ['<c-;>'] = 'jump_split',
         ['<c-\\>'] = 'jump_vsplit',
+        o = 'jump',
       },
     },
   },

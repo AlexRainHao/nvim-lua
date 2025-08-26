@@ -19,6 +19,8 @@ function M.setup()
           autoSearchPaths = true,
           diagnosticMode = 'workspace',
           useLibraryCodeForTypes = true,
+          autoImportCompletions = true,
+          reportMissingImports = true,
         },
       },
     },
@@ -40,6 +42,9 @@ function M.setup()
     settings = {
       organizeImports = true,
       fixAll = true,
+      lint = {
+        enable = true,
+      },
     },
     -- disable hover to avoid conflicts with pyright
     capabilities = {
