@@ -39,13 +39,14 @@ return {
           timer = 200,
         },
       })
-      vim.keymap.set('n', 'gr', substitute.operator, { noremap = true })
-      vim.keymap.set('n', 'griw', function()
+
+      vim.keymap.set('n', '<leader>gr', substitute.operator, { noremap = true })
+      vim.keymap.set('n', '<leader>griw', function()
         substitute.operator({ motion = 'iw' })
       end, { noremap = true })
-      vim.keymap.set('n', 'grr', substitute.line, { noremap = true })
-      vim.keymap.set('n', 'gr$', substitute.eol, { noremap = true })
-      vim.keymap.set('x', 'gr', substitute.visual, { noremap = true })
+      vim.keymap.set('n', '<leader>grr', substitute.line, { noremap = true })
+      vim.keymap.set('n', '<leader>gr$', substitute.eol, { noremap = true })
+      vim.keymap.set('x', '<leader>gr', substitute.visual, { noremap = true })
     end,
   },
 }
