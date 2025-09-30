@@ -52,7 +52,7 @@ return {
         '<NOP>',
         mode = 'n',
         function()
-          require('gitignore').generate()
+          require('gitignore').generate(vim.fn.expand('%:p:h'))
         end,
         desc = 'Add gitignore',
       },

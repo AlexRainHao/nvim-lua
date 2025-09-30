@@ -42,49 +42,4 @@ return {
       })
     end,
   },
-  {
-    'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/nvim-nio',
-      'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-neotest/neotest-python',
-    },
-    keys = {
-      {
-        '<NOP>',
-        function()
-          require('neotest').run.run(vim.fn.expand('%'))
-        end,
-        desc = 'Tests current file',
-      },
-      {
-        '<NOP>',
-        function()
-          require('neotest').run.run(vim.fn.getcwd())
-        end,
-        desc = 'Tests project',
-      },
-      {
-        '<NOP>',
-        function()
-          require('neotest').output.open({ enter = true })
-        end,
-        desc = 'Tests output',
-      },
-    },
-    config = function()
-      require('neotest').setup({
-        adapters = {
-          require('neotest-python')({
-            dap = { justMyCode = false }, -- optional if using debugging
-            runner = 'pytest',
-            python = './.venv/bin/python',
-            args = { '--color', 'yes', '-vv', '-s' },
-          }),
-        },
-      })
-    end,
-  },
 }
