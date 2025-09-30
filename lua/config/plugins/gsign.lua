@@ -27,19 +27,19 @@ return {
       )
       vim.keymap.set(
         'n',
-        '<Leader>gc',
+        '<Leader>gC',
         ':Gitsigns blame_line<CR>',
         { noremap = true, silent = true }
       )
       vim.keymap.set(
         'n',
-        '<Leader>gr',
+        '<Leader>gR',
         ':Gitsigns reset_hunk<CR>',
         { noremap = true, silent = true }
       )
       vim.keymap.set(
         'n',
-        '<Leader>gh',
+        '<Leader>gH',
         ':Gitsigns preview_hunk<CR>',
         { noremap = true, silent = true }
       )
