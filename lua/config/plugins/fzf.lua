@@ -15,6 +15,10 @@ return {
       fzf.grep_visual({ fzf_opts = { ['--layout'] = 'default' } })
     end, mode_m)
 
+    vim.keymap.set('n', '<c-s-k>', function()
+      fzf.builtin()
+    end, mode_m)
+
     fzf.setup({
       global_resume = true,
       global_resume_query = true,
@@ -44,6 +48,13 @@ return {
           ['ctrl-i'] = 'half-page-up',
           ['ctrl-a'] = 'beginning-of-line',
           ['ctrl-e'] = 'end-of-line',
+          ['ctrl-y'] = 'toggle-all',
+        },
+      },
+
+      actions = {
+        files = {
+          ['ctrl-q'] = fzf.actions.file_sel_to_qf,
         },
       },
 
