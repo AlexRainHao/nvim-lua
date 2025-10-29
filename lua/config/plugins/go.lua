@@ -4,6 +4,7 @@ return {
     'ray-x/guihua.lua',
     'neovim/nvim-lspconfig',
     'nvim-treesitter/nvim-treesitter',
+    'FeiyouG/commander.nvim',
   },
   config = function()
     require('go').setup({
@@ -25,6 +26,31 @@ return {
         require('go.format').gofmt()
       end,
       group = vim.api.nvim_create_augroup('GoFormat', {}),
+    })
+
+    local commander = require('commander')
+
+    commander.add({
+      {
+        desc = 'Go Add json Tag',
+        cmd = '<CMD>GoAddTag json<CR>',
+      },
+      {
+        desc = 'Go Remove json Tag',
+        cmd = '<CMD>GoRmTag json',
+      },
+      {
+        desc = 'Go Add yaml Tag',
+        cmd = '<CMD>GoAddTag yaml<CR>',
+      },
+      {
+        desc = 'Go Remove yaml Tag',
+        cmd = '<CMD>GoRmTag yaml',
+      },
+      {
+        desc = 'Go Fill Struct',
+        cmd = '<CMD>GoFillStruct<CR>',
+      },
     })
   end,
   ft = { 'go', 'gomod' },
