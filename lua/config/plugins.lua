@@ -49,4 +49,5 @@ require('lazy').setup({
   require('config.plugins.semicolon'),
   require('config.plugins.todo'),
   require('config.plugins.neotest'),
+  require('config.plugins.llm'),
 })

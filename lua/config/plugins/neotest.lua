@@ -33,7 +33,12 @@ return {
       },
     },
     config = function()
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = { 'python' },
+      })
+
       require('neotest').setup({
+        output = { open_on_run = true },
         adapters = {
           require('neotest-python')({
             dap = { justMyCode = false }, -- optional if using debugging
@@ -41,10 +46,7 @@ return {
             python = './.venv/bin/python',
             args = { '--color', 'yes', '-vv', '-s' },
           }),
-        },
-      })
-      require('neotest').setup({
-        adapters = {
+
           require('neotest-golang')({
             runner = 'go',
             go_test_args = {
