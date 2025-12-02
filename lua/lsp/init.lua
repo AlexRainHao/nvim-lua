@@ -148,10 +148,8 @@ null_ls.setup({
           'prettier.config.js',
           'prettier.config.cjs',
           'prettier.config.mjs',
-          'package.json', -- Also check package.json for prettier config
-        }) or utils.root_has_file({ 'package.json' }) and utils.has_package_json_key(
-          'prettier'
-        )
+          -- 'package.json', -- Also check package.json for prettier config
+        }) and utils.has_package_json_key('prettier')
       end,
     }),
     null_ls.builtins.formatting.markdownlint,
