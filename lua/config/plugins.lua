@@ -24,6 +24,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   require('config.plugins.ui').config,
+  require('config.plugins.tree'),
   require('config.plugins.telescope').config,
   require('config.plugins.fzf'),
   require('config.plugins.bufferline'),
