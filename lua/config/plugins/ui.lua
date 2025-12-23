@@ -28,6 +28,20 @@ local theme_config = {
       require('vitesse').load()
     end,
   },
+  gruvbox = {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = function()
+      require('gruvbox').load()
+    end,
+  },
+  kanagawa = {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    config = function()
+      require('kanagawa').load('wave')
+    end
+  },
 }
 
 local function determine_teme()
@@ -37,13 +51,15 @@ local function determine_teme()
     error('theme ' .. _prefer_theme .. 'not supported')
   end
 
+  vim.o.background = 'dark'
+
   return theme_config[_prefer_theme]
 end
 
 local M = {}
 
 M.config = {
-  { 'nvim-tree/nvim-web-devicons', opts = {} },
+  { 'nvim-tree/nvim-web-devicons',  opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
   {
     'goolord/alpha-nvim',
