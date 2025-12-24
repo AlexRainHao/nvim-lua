@@ -40,7 +40,7 @@ local theme_config = {
     priority = 1000,
     config = function()
       require('kanagawa').load('wave')
-    end
+    end,
   },
 }
 
@@ -59,7 +59,7 @@ end
 local M = {}
 
 M.config = {
-  { 'nvim-tree/nvim-web-devicons',  opts = {} },
+  { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
   {
     'goolord/alpha-nvim',

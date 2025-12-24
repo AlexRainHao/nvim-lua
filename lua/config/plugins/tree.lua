@@ -8,7 +8,7 @@ return {
   keys = {
     {
       '<c-q>',
-      '<cmd>NvimTreeToggle<cr>',
+      '<cmd>NvimTreeFindFileToggle<cr>',
       desc = 'Toggle nvim tree',
     },
   },
