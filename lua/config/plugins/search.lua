@@ -6,14 +6,14 @@ return {
       vim.g.any_jump_disable_default_keybindings = 1
     end,
     keys = {
-      { '<leader>j', mode = 'n', ':AnyJump<CR>', desc = 'Any jump' },
+      { '<leader>j', mode = 'n', ':AnyJump<CR>',     desc = 'Any jump' },
       {
         '<leader>j',
         mode = 'x',
         ':AnyJumpVisual<CR>',
         desc = 'Any jump visual',
       },
-      { 'go', mode = 'n', ':AnyJumpBack<CR>', desc = 'Any jump back' },
+      { 'go',        mode = 'n', ':AnyJumpBack<CR>', desc = 'Any jump back' },
     },
     config = function()
       vim.g.any_jump_window_width_ratio = 0.8

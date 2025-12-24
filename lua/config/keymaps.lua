@@ -7,25 +7,25 @@ local mode_i = { 'i' }
 
 local mappings = {
   -- Actions
-  { from = 'jk', to = '<ESC>', mode = mode_i },
-  { from = 'Q', to = ':q<CR>' },
+  { from = 'jk',        to = '<ESC>',                  mode = mode_i },
+  { from = 'Q',         to = ':q<CR>' },
   { from = '<Leader>Q', to = ':q!<CR>' },
-  { from = 'W', to = ':wa<CR>' },
-  { from = 'v,', to = 'v$' },
+  { from = 'W',         to = ':wa<CR>' },
+  { from = 'v,',        to = 'v$' },
 
   -- Movements
-  { from = ',.', to = '$', mode = mode_nv },
+  { from = ',.',        to = '$',                      mode = mode_nv },
 
   -- Windows
-  { from = '<up>', to = '<C-w>k' },
-  { from = '<down>', to = '<C-w>j' },
-  { from = '<left>', to = '<C-w>h' },
-  { from = '<right>', to = '<C-w>l' },
+  { from = '<up>',      to = '<C-w>k' },
+  { from = '<down>',    to = '<C-w>j' },
+  { from = '<left>',    to = '<C-w>h' },
+  { from = '<right>',   to = '<C-w>l' },
 
-  { from = '<M-k>', to = ':res -5<CR>' },
-  { from = '<M-j>', to = ':res +5<CR>' },
-  { from = '<M-h>', to = ':vertical resize -5<CR>' },
-  { from = '<M-l>', to = ':vertical resize +5<CR>' },
+  { from = '<M-k>',     to = ':res -5<CR>' },
+  { from = '<M-j>',     to = ':res +5<CR>' },
+  { from = '<M-h>',     to = ':vertical resize -5<CR>' },
+  { from = '<M-l>',     to = ':vertical resize +5<CR>' },
   {
     from = '<leader>\\',
     to = ':set nosplitright<CR>:vsplit<CR>:set splitright<CR>',
@@ -40,9 +40,9 @@ local mappings = {
   { from = '<leader>q', to = '<C-w>j:q<CR>' },
 
   -- Tabs
-  { from = 'tu', to = ':tabe<CR>' },
-  { from = '<M-[>', to = ':tabp<CR>' },
-  { from = '<M-]>', to = ':tabn<CR>' },
+  { from = 'tu',        to = ':tabe<CR>' },
+  { from = '<M-[>',     to = ':tabp<CR>' },
+  { from = '<M-]>',     to = ':tabn<CR>' },
 }
 
 for _, mapping in ipairs(mappings) do
@@ -61,3 +61,8 @@ vim.cmd([[
     tnoremap <ESC> <C-\><C-N>
 ]])
 -- tnoremap <C-D> <C-\><C-N><C-O>
+
+-- quick fix
+vim.cmd([[
+  autocmd! FileType qf nnoremap <buffer> <leader>\ <C-w><Enter><C-w>L
+]])

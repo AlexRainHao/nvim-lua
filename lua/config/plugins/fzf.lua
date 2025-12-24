@@ -36,6 +36,7 @@ return {
 
       keymap = {
         builtin = {
+          ['<M-Esc>'] = 'hide',
           ['<c-f>'] = 'toggle-fullscreen',
           ['<c-p>'] = 'toggle-preview',
           ['<c-d>'] = 'preview-page-down',
@@ -43,6 +44,7 @@ return {
         },
         fzf = {
           ['esc'] = 'abort',
+          ['ctrl-l'] = 'toggle',
           ['ctrl-r'] = 'unix-line-discard',
           ['ctrl-n'] = 'half-page-down',
           ['ctrl-i'] = 'half-page-up',
@@ -77,8 +79,8 @@ return {
           cmd = 'man -c %s | col -bx',
         },
         builtin = {
-          syntax = true, -- preview syntax highlight?
-          syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
+          syntax = true,                -- preview syntax highlight?
+          syntax_limit_l = 0,           -- syntax limit (lines), 0=nolimit
           syntax_limit_b = 1024 * 1024, -- syntax limit (bytes), 0=nolimit
           jump_to_line = true,
           title = false,
@@ -89,9 +91,9 @@ return {
         previewer = 'bat',
         prompt = 'Files❯ ',
         multiprocess = true, -- run command in a separate process
-        git_icons = true, -- show git icons?
-        file_icons = true, -- show file icons?
-        color_icons = true, -- colorize file|git icons
+        git_icons = true,    -- show git icons?
+        file_icons = true,   -- show file icons?
+        color_icons = true,  -- colorize file|git icons
         find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
         rg_opts = "--color=never --files --hidden --follow -g '!.git'",
         fd_opts = '--color=never --type f --hidden --follow --exclude .git',
@@ -99,8 +101,8 @@ return {
 
       buffers = {
         prompt = 'Buffers❯ ',
-        file_icons = true, -- show file icons?
-        color_icons = true, -- colorize file|git icons
+        file_icons = true,    -- show file icons?
+        color_icons = true,   -- colorize file|git icons
         sort_lastused = true, -- sort buffers() by last used
       },
 

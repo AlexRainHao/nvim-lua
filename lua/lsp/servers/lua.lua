@@ -32,6 +32,10 @@ function M.setup()
             indent_style = 'space',
             indent_size = '2',
             quote_style = 'single',
+            call_arg_parentheses = 'keep',
+            detect_end_of_line = 'true',
+            max_line_width = '80',
+            end_of_line = 'lf'
           },
         },
       },
