@@ -42,6 +42,17 @@ local theme_config = {
       require('kanagawa').load('wave')
     end,
   },
+  gruvbox_material = {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_material_background = 'soft'
+      vim.g.gruvbox_material_enable_italic = true
+      vim.cmd.colorscheme('gruvbox-material')
+    end
+  }
 }
 
 local function determine_teme()
@@ -59,7 +70,7 @@ end
 local M = {}
 
 M.config = {
-  { 'nvim-tree/nvim-web-devicons', opts = {} },
+  { 'nvim-tree/nvim-web-devicons',  opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
   {
     'goolord/alpha-nvim',
