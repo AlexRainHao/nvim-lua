@@ -15,6 +15,10 @@ return {
       fzf.grep_visual({ fzf_opts = { ['--layout'] = 'default' } })
     end, mode_m)
 
+    vim.keymap.set('n', '<c-s-f>', function()
+      fzf.resume()
+    end)
+
     vim.keymap.set('n', '<c-s-k>', function()
       fzf.builtin()
     end, mode_m)
@@ -107,7 +111,7 @@ return {
       },
 
       grep = {
-        rg_opts = '--color=always --line-number --column --smart-case --ignore-file=.fzfignore',
+        rg_opts = '--color=always --line-number --column --smart-case',
         previewer = 'builtin',
         jump_to_line = true,
       },
