@@ -8,6 +8,17 @@ local has_words_before = function()
       == nil
 end
 
+local function is_in_start_tag()
+  -- It's okay to keep the default setting, `ignore_injections` to `true`
+  -- It will just make everything inside script tag or style tag as `raw_text`
+  local node = vim.treesitter.get_node()
+  if not node then
+    return false
+  end
+  local node_to_check = { 'start_tag', 'self_closing_tag', 'directive_attribute' }
+  return vim.tbl_contains(node_to_check, node:type())
+end
+
 local M = {}
 
 M.config = {
@@ -34,6 +45,21 @@ M.config = {
           -- optional call to setup (see customization section)
           require('cmp_nvim_ultisnips').setup({})
         end,
+      },
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
+      {
+        'xzbdmw/colorful-menu.nvim',
+        opts = {
+          ls = {
+            fallback = false,
+            vtsls = {
+              extra_info_hl = false,
+            },
+            ts_ls = {
+              extra_info_hl = false,
+            },
+          },
+        },
       },
     },
   },
@@ -164,6 +190,7 @@ M.configfunc = function()
   local lspkind = require('lspkind')
   local cmp = require('cmp')
   local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
+  local types = require('cmp.types')
 
   cmp.setup({
     preselect = cmp.PreselectMode.None,
@@ -201,7 +228,36 @@ M.configfunc = function()
       end,
     },
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
+      {
+        name = 'nvim_lsp',
+        entry_filter = function(entry, ctx)
+          if ctx.filetype ~= 'vue' then
+            return true
+          end
+
+          local bufnr = ctx.bufnr
+          local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
+          if cached_is_in_start_tag == nil then
+            vim.b[bufnr]._vue_ts_cached_is_in_start_tag = is_in_start_tag()
+          end
+          -- If not in start tag, return true
+          if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then
+            return true
+          end
+
+          local cursor_before_line = ctx.cursor_before_line
+          if cursor_before_line:sub(-1) == '@' then
+            return entry.completion_item.label:match('^@')
+          elseif cursor_before_line:sub(-1) == ':' then
+            return entry.completion_item.label:match('^:') and not entry.completion_item.label:match('^:on%-')
+            -- For slot
+          elseif cursor_before_line:sub(-1) == '#' then
+            return entry.completion_item.kind == types.lsp.CompletionItemKind.Method
+          else
+            return true
+          end
+        end
+      },
       { name = 'buffer' },
       { name = 'ultisnips' },
     }, {

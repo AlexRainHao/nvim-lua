@@ -1,6 +1,36 @@
 local M = {}
 
+M.inlay_hints = {
+  includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = 'all',
+  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = true,
+}
+
 function M.setup()
+  local vue_plugin = {
+    name = '@vue/typescript-plugin',
+    location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
+    languages = { 'vue' },
+    configNamespace = 'typescript',
+    enableForWorkspaceTypeScriptVersions = true,
+  }
+
+  vim.lsp.config('vue_ls', {
+    -- cmd = { 'vue-language-server', '--stdio' },
+    init_options = {
+      vue = {
+        hybridMode = true,
+      }
+    },
+    on_attach = function(client, _)
+      client.server_capabilities.documentFormattingProvider = nil
+    end
+  })
+
   -- TypeScript Language Server
   vim.lsp.config('ts_ls', {
     cmd = { 'typescript-language-server', '--stdio' },
@@ -9,14 +39,24 @@ function M.setup()
       'javascriptreact',
       'typescript',
       'typescriptreact',
+      'vue',
     },
     root_markers = {
       'package.json',
       'tsconfig.json',
       'jsconfig.json',
+      'nuxt.config.ts',
+      'vite.config.ts',
       '.git',
     },
+    settings = {
+      javascript = { inlayHints = M.inlay_hints },
+      typescript = { inlayHints = M.inlay_hints },
+    },
     init_options = {
+      plugins = {
+        vue_plugin,
+      },
       preferences = {
         disableSuggestions = true,
       },
@@ -27,18 +67,9 @@ function M.setup()
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end
+
       -- Disable semantic tokens
       client.server_capabilities.semanticTokensProvider = nil
-    end,
-
-    on_new_config = function(new_config, new_root_dir)
-      new_config.init_options = new_config.init_options or {}
-      new_config.init_options.plugins = new_config.init_options.plugins or {}
-      table.insert(new_config.init_options.plugins, {
-        name = '@vue/typescript-plugin',
-        location = new_root_dir .. '/node_modules/@vue/typescript-plugin',
-        languages = { 'vue' },
-      })
     end,
   })
 
@@ -115,9 +146,7 @@ function M.setup()
   })
 
   -- Enable the servers
-  vim.lsp.enable('ts_ls')
-  vim.lsp.enable('biome')
-  vim.lsp.enable('eslint')
+  vim.lsp.enable({ 'ts_ls', 'biome', 'eslint' })
 end
 
 return M
