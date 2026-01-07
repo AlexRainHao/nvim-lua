@@ -64,6 +64,10 @@ M.config = {
     },
   },
   {
+    'windwp/nvim-ts-autotag',
+    opts = {},
+  },
+  {
     'williamboman/mason-lspconfig.nvim',
     lazy = false,
     dependencies = {

@@ -89,6 +89,7 @@ require('mason-lspconfig').setup({
     'marksman',
     'biome',
     'ts_ls',
+    'vtsls',
     'eslint',
     'jsonls',
     'yamlls',
