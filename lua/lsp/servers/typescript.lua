@@ -21,11 +21,11 @@ local vue_plugin = {
 local ts_on_attach = function(client)
   local existing_capabilities = client.server_capabilities
 
+  existing_capabilities.documentFormattingProvider = nil
+
   if existing_capabilities == nil then
     return
   end
-
-  existing_capabilities.documentFormattingProvider = nil
 
   if client.name == 'vtsls' then
     local existing_filters = existing_capabilities.workspace.fileOperations.didRename.filters or {}
@@ -130,12 +130,10 @@ function M.setup()
   vim.lsp.config('biome', {
     cmd = { 'biome', 'lsp-proxy' },
     filetypes = {
-      'javascript',
-      'javascriptreact',
       'json',
       'jsonc',
-      'typescript',
-      'typescriptreact',
+      'biome.json',
+      'biome.jsonc'
     },
     root_markers = { 'biome.json', 'biome.jsonc', '.git' },
   })
