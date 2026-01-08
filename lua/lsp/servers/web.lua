@@ -4,7 +4,7 @@ function M.setup()
   -- HTML Language Server
   vim.lsp.config('html', {
     cmd = { 'vscode-html-language-server', '--stdio' },
-    filetypes = { 'html' },
+    filetypes = { 'html', 'vue' },
     root_markers = { 'package.json', '.git' },
     init_options = {
       configurationSection = { 'html', 'css', 'javascript' },
@@ -27,6 +27,7 @@ function M.setup()
       'less',
       'sass',
       'scss',
+      'vue',
     },
     root_markers = { 'package.json', '.git' },
   })
@@ -34,7 +35,7 @@ function M.setup()
   -- CSS Language Server
   vim.lsp.config('cssls', {
     cmd = { 'vscode-css-language-server', '--stdio' },
-    filetypes = { 'css', 'scss', 'less' },
+    filetypes = { 'css', 'scss', 'less', 'vue' },
     root_markers = { 'package.json', '.git' },
     settings = {
       css = {

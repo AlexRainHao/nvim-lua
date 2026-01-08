@@ -148,7 +148,6 @@ null_ls.setup({
           'prettier.config.js',
           'prettier.config.cjs',
           'prettier.config.mjs',
-          -- 'package.json', -- Also check package.json for prettier config
         }) and utils.has_package_json_key('prettier')
       end,
     }),
@@ -193,5 +192,31 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       context = { only = { 'source.organizeImports' } },
       apply = true,
     })
+  end,
+
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  -- Only target relevant filetypes to save performance
+  pattern = { '*.vue', '*.ts', '*.tsx', '*.js' },
+  callback = function(args)
+    local clients = vim.lsp.get_clients({ bufnr = args.buf })
+
+    local has_eslint = false
+    for _, client in pairs(clients) do
+      if client.name == 'eslint' then
+        has_eslint = true
+        break
+      end
+    end
+
+    if has_eslint then
+      for _, client in pairs(clients) do
+        if client.name == 'volar' or client.name == 'vue_ls' or client.name == 'html' then
+          client.server_capabilities.documentFormattingProvider = nil
+          client.server_capabilities.documentRangeFormattingProvider = nil
+        end
+      end
+    end
   end,
 })
