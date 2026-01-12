@@ -84,6 +84,10 @@ function M.setup(bufnr)
   vim.keymap.set('n', '<leader>to', function()
     neotest.output.open({ enter = true })
   end, { desc = 'Show test output' })
+
+  vim.keymap.set('n', '<leader>tt', function()
+    neotest.summary.toggle()
+  end, { desc = 'Toggle neotest summary' })
   ----------------------------------------
 end
 

@@ -31,6 +31,13 @@ return {
         end,
         desc = 'Tests output',
       },
+      {
+        '<NOP>',
+        function()
+          require('neotest').summary.toggle()
+        end,
+        desc = 'Tests summary',
+      },
     },
     config = function()
       require('nvim-treesitter.configs').setup({
