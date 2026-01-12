@@ -41,9 +41,6 @@ function M.setup()
       },
     },
   })
-
-  -- Enable the language server
-  vim.lsp.enable('luals')
 end
 
 return M

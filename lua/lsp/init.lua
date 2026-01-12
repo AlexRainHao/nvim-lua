@@ -80,108 +80,18 @@ require('lsp.servers.typescript').setup()
 require('lsp.servers.web').setup()
 require('lsp.servers.go').setup()
 require('lsp.servers.rust').setup()
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    'lua_ls',
-    'pyright',
-    'ruff',
-    'marksman',
-    'biome',
-    'ts_ls',
-    'vtsls',
-    'eslint',
-    'jsonls',
-    'yamlls',
-    'taplo',
-    'html',
-    'emmet_language_server',
-    'cssls',
-    'tailwindcss',
-    'vue_ls',
-    'gopls',
-    'rust_analyzer',
-  },
-  automatic_enable = true,
-})
 
-require('mason-null-ls').setup({
-  ensure_installed = {
-    'prettierd',
-    'markdownlint',
-    'golines',
-  },
-  automatic_installation = true,
-})
+require('mason').setup()
+require('mason-lspconfig').setup()
 
-local null_ls = require('null-ls')
-null_ls.setup({
-  sources = {
-    -- Prettier formatter
-    null_ls.builtins.formatting.prettierd.with({
-      filetypes = {
-        'javascript',
-        'javascriptreact',
-        'typescript',
-        'typescriptreact',
-        'vue',
-        'css',
-        'scss',
-        'less',
-        'html',
-        'json',
-        'jsonc',
-        'yaml',
-        'markdown',
-        'graphql',
-      },
-      condition = function(utils)
-        return utils.root_has_file({
-          '.prettierrc',
-          '.prettierrc.json',
-          '.prettierrc.js',
-          '.prettierrc.cjs',
-          '.prettierrc.mjs',
-          '.prettierrc.yml',
-          '.prettierrc.yaml',
-          '.prettierrc.toml',
-          'prettier.config.js',
-          'prettier.config.cjs',
-          'prettier.config.mjs',
-        }) and utils.has_package_json_key('prettier')
-      end,
-    }),
-    null_ls.builtins.formatting.markdownlint,
-  },
-})
-
--- format on save
-local formatter_filetypes = {
-  json = true,
-  jsonc = true,
-  yaml = true,
-  toml = true,
-  markdown = true,
-  python = true,
-  go = true,
-  lua = true,
-  html = true,
-  css = true,
-  javascript = true,
-  typescript = true,
-  typescriptreact = true,
-  vue = true,
-  rust = true,
-}
+require('null-ls').setup()
 
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*',
   callback = function()
-    if formatter_filetypes[vim.bo.filetype] then
-      local lineno = vim.api.nvim_win_get_cursor(0)
-      vim.lsp.buf.format({ async = false })
-      pcall(vim.api.nvim_win_set_cursor, 0, lineno)
-    end
+    local lineno = vim.api.nvim_win_get_cursor(0)
+    vim.lsp.buf.format({ async = false })
+    pcall(vim.api.nvim_win_set_cursor, 0, lineno)
   end,
 })
 
@@ -192,31 +102,5 @@ vim.api.nvim_create_autocmd('BufWritePre', {
       context = { only = { 'source.organizeImports' } },
       apply = true,
     })
-  end,
-
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  -- Only target relevant filetypes to save performance
-  pattern = { '*.vue', '*.ts', '*.tsx', '*.js' },
-  callback = function(args)
-    local clients = vim.lsp.get_clients({ bufnr = args.buf })
-
-    local has_eslint = false
-    for _, client in pairs(clients) do
-      if client.name == 'eslint' then
-        has_eslint = true
-        break
-      end
-    end
-
-    if has_eslint then
-      for _, client in pairs(clients) do
-        if client.name == 'volar' or client.name == 'vue_ls' or client.name == 'html' then
-          client.server_capabilities.documentFormattingProvider = nil
-          client.server_capabilities.documentRangeFormattingProvider = nil
-        end
-      end
-    end
   end,
 })

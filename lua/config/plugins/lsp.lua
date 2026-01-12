@@ -21,11 +21,25 @@ end
 
 local M = {}
 
+
 M.config = {
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
   {
     'hrsh7th/nvim-cmp',
     after = 'SirVer/ultisnips',
     event = { 'InsertEnter', 'CmdlineEnter' },
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, { name = 'lazydev', group_index = 0 })
+    end,
     dependencies = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -68,29 +82,47 @@ M.config = {
     opts = {},
   },
   {
-    'williamboman/mason-lspconfig.nvim',
-    lazy = false,
-    dependencies = {
-      { 'williamboman/mason.nvim', build = ':MasonUpdate' },
-    },
-    config = function()
-      require('mason').setup({
-        ui = {
-          icons = {
-            package_installed = '✓',
-            package_pending = '➜',
-            package_uninstalled = '✗',
-          },
+    'mason-org/mason.nvim',
+    build = ':MasonUpdate',
+    opts = {
+      ui = {
+        icons = {
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
         },
-      })
-      require('mason-lspconfig').setup({
-        automatic_installation = true,
-      })
-    end,
+      },
+    }
   },
   {
-    'j-hui/fidget.nvim',
-    opts = {},
+    'mason-org/mason-lspconfig.nvim',
+    lazy = false,
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig'
+    },
+    opts = {
+      ensure_installed = {
+        'lua_ls',
+        'pyright',
+        'ruff',
+        'marksman',
+        'biome',
+        'vtsls',
+        'eslint',
+        'jsonls',
+        'yamlls',
+        'taplo',
+        'html',
+        'emmet_language_server',
+        'cssls',
+        'tailwindcss',
+        'vue_ls',
+        'gopls',
+        'rust_analyzer',
+      },
+      automatic_enable = true,
+    },
   },
   {
     'b0o/schemastore.nvim',
@@ -113,19 +145,46 @@ M.config = {
   {
     'jay-babu/mason-null-ls.nvim',
     dependencies = { 'mason.nvim', 'nvimtools/none-ls.nvim' },
+    config = function()
+      require('mason-null-ls').setup({
+        ensure_installed = {
+          'prettierd',
+          'markdownlint',
+          'golines',
+        },
+        automatic_installation = true
+      })
+    end
   },
   {
-    'nvimtools/none-ls.nvim', -- successor to null-ls
+    'nvimtools/none-ls.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-  },
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-      },
-    },
+    config = function()
+      local null_ls = require('null-ls')
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.golines,
+          null_ls.builtins.formatting.prettierd.with({
+            condition = function(utils)
+              return utils.root_has_file({
+                '.prettierrc',
+                '.prettierrc.json',
+                '.prettierrc.js',
+                '.prettierrc.cjs',
+                '.prettierrc.mjs',
+                '.prettierrc.yml',
+                '.prettierrc.yaml',
+                '.prettierrc.toml',
+                'prettier.config.js',
+                'prettier.config.cjs',
+                'prettier.config.mjs',
+              }) and utils.has_package_json_key('prettier')
+            end,
+          }),
+          null_ls.builtins.formatting.markdownlint,
+        },
+      })
+    end
   },
   {
     'folke/trouble.nvim',
@@ -151,8 +210,6 @@ M.config = {
         ['<esc>'] = 'close',
         k = 'prev',
         j = 'next',
-        ['<c-;>'] = 'jump_split',
-        ['<c-\\>'] = 'jump_vsplit',
         o = 'jump',
       },
     },
@@ -178,7 +235,8 @@ M.config = {
     'danymat/neogen',
     keys = {
       {
-        '<leader>nf',
+        -- '<leader>nf',
+        '<leader>//',
         function()
           require('neogen').generate()
         end,
@@ -232,43 +290,44 @@ M.configfunc = function()
       end,
     },
     sources = cmp.config.sources({
-      {
-        name = 'nvim_lsp',
-        entry_filter = function(entry, ctx)
-          if ctx.filetype ~= 'vue' then
-            return true
-          end
+        {
+          name = 'nvim_lsp',
+          entry_filter = function(entry, ctx)
+            if ctx.filetype ~= 'vue' then
+              return true
+            end
 
-          local bufnr = ctx.bufnr
-          local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
-          if cached_is_in_start_tag == nil then
-            vim.b[bufnr]._vue_ts_cached_is_in_start_tag = is_in_start_tag()
-          end
-          -- If not in start tag, return true
-          if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then
-            return true
-          end
+            local bufnr = ctx.bufnr
+            local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
+            if cached_is_in_start_tag == nil then
+              vim.b[bufnr]._vue_ts_cached_is_in_start_tag = is_in_start_tag()
+            end
+            -- If not in start tag, return true
+            if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then
+              return true
+            end
 
-          local cursor_before_line = ctx.cursor_before_line
-          if cursor_before_line:sub(-1) == '@' then
-            return entry.completion_item.label:match('^@')
-          elseif cursor_before_line:sub(-1) == ':' then
-            return entry.completion_item.label:match('^:') and not entry.completion_item.label:match('^:on%-')
-            -- For slot
-          elseif cursor_before_line:sub(-1) == '#' then
-            return entry.completion_item.kind == types.lsp.CompletionItemKind.Method
-          else
-            return true
+            local cursor_before_line = ctx.cursor_before_line
+            if cursor_before_line:sub(-1) == '@' then
+              return entry.completion_item.label:match('^@')
+            elseif cursor_before_line:sub(-1) == ':' then
+              return entry.completion_item.label:match('^:') and not entry.completion_item.label:match('^:on%-')
+              -- For slot
+            elseif cursor_before_line:sub(-1) == '#' then
+              return entry.completion_item.kind == types.lsp.CompletionItemKind.Method
+            else
+              return true
+            end
           end
-        end
+        },
+        { name = 'buffer' },
+        { name = 'ultisnips' },
       },
-      { name = 'buffer' },
-      { name = 'ultisnips' },
-    }, {
-      { name = 'path' },
-      { name = 'nvim_lua' },
-      { name = 'calc' },
-    }),
+      {
+        { name = 'path' },
+        { name = 'nvim_lua' },
+        { name = 'calc' },
+      }),
     mapping = cmp.mapping.preset.insert({
       ['<c-n>'] = cmp.config.disable,
       ['<c-p>'] = cmp.config.disable,

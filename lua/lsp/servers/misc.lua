@@ -11,16 +11,9 @@ function M.setup()
     },
     settings = {
       json = {
-        schemas = (function()
-          local ok, schemastore = pcall(require, 'schemastore')
-          if ok then
-            return schemastore.json.schemas()
-          else
-            return {}
-          end
-        end)(),
-        validate = { enable = true },
-      },
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true }
+      }
     },
   })
 
@@ -71,11 +64,6 @@ function M.setup()
     filetypes = { 'toml' },
     root_markers = { 'Cargo.toml', 'pyproject.toml', '.git' },
   })
-
-  -- Enable the servers
-  vim.lsp.enable('jsonls')
-  vim.lsp.enable('yamlls')
-  vim.lsp.enable('taplo')
 end
 
 return M

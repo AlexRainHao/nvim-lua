@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup_global() end
 
-local function selectFormatter(bufnr)
+local function select_formatter(bufnr)
   local clients = vim.lsp.get_clients({ bufnr = bufnr })
   local formatters = {}
 
@@ -34,7 +34,7 @@ commander.add({
   {
     desc = 'Select Formatter',
     cmd = function()
-      selectFormatter(vim.api.nvim_get_current_buf())
+      select_formatter(vim.api.nvim_get_current_buf())
     end
   },
 })
@@ -62,13 +62,8 @@ function M.setup(bufnr)
   vim.keymap.set('n', '<c-,>', vim.lsp.buf.code_action, opts)
 
   -- formatting
-  -- FIXME:
   vim.keymap.set('n', '<leader>ff', function()
     vim.lsp.buf.format({ async = true })
-    local gof = vim.api.nvim_buf_get_name(0)
-    if string.match(gof, '(.go)$') then
-      require('go.format').gofmt()
-    end
   end, opts)
 
   ----------------------------------------

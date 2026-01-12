@@ -38,9 +38,6 @@ function M.setup()
       },
     },
   })
-
-  -- Enable the servers
-  vim.lsp.enable('rust_analyzer')
 end
 
 return M

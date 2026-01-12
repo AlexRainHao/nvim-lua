@@ -4,13 +4,14 @@ function M.setup()
   -- HTML Language Server
   vim.lsp.config('html', {
     cmd = { 'vscode-html-language-server', '--stdio' },
-    filetypes = { 'html', 'vue' },
+    filetypes = { 'html' },
     root_markers = { 'package.json', '.git' },
     init_options = {
-      configurationSection = { 'html', 'css', 'javascript' },
+      configurationSection = { 'html', 'css', 'javascript', 'typescript' },
       embeddedLanguages = {
         css = true,
         javascript = true,
+        typescript = true
       },
       provideFormatter = true,
     },
@@ -22,11 +23,11 @@ function M.setup()
     filetypes = {
       'css',
       'html',
-      'javascript',
-      'typescript',
       'less',
       'sass',
       'scss',
+      'typescriptreact',
+      'javascriptreact',
       'vue',
     },
     root_markers = { 'package.json', '.git' },
@@ -35,7 +36,7 @@ function M.setup()
   -- CSS Language Server
   vim.lsp.config('cssls', {
     cmd = { 'vscode-css-language-server', '--stdio' },
-    filetypes = { 'css', 'scss', 'less', 'vue' },
+    filetypes = { 'css', 'scss', 'less' },
     root_markers = { 'package.json', '.git' },
     settings = {
       css = {
@@ -117,12 +118,6 @@ function M.setup()
       '.git',
     },
   })
-
-  -- Enable the servers
-  vim.lsp.enable('html')
-  vim.lsp.enable('emmet_language_server')
-  vim.lsp.enable('cssls')
-  vim.lsp.enable('tailwindcss')
 end
 
 return M

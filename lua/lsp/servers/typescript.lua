@@ -10,6 +10,32 @@ M.inlay_hints = {
   includeInlayVariableTypeHints = true,
 }
 
+local eslint_configs = {
+  '.eslintrc',
+  '.eslintrc.js',
+  '.eslintrc.cjs',
+  '.eslintrc.json',
+  '.eslintrc.yaml',
+  '.eslintrc.yml',
+  'eslint.config.js',
+  'eslint.config.mjs',
+  'eslint.config.cjs',
+}
+
+
+local has_client = function(bufnr, name)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+  for _, client in pairs(clients) do
+    if client.name == name then
+      return client
+    end
+  end
+
+  return nil
+end
+
+
 local vue_plugin = {
   name = '@vue/typescript-plugin',
   location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
@@ -132,10 +158,12 @@ function M.setup()
     filetypes = {
       'json',
       'jsonc',
-      'biome.json',
-      'biome.jsonc'
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
     },
-    root_markers = { 'biome.json', 'biome.jsonc', '.git' },
+    root_markers = { 'biome.json', 'biome.jsonc' },
   })
 
   -- ESLint Language Server
@@ -147,19 +175,33 @@ function M.setup()
       'typescript',
       'typescriptreact',
       'vue',
+      'css',
+      'less',
+      'scss',
+      'html',
     },
-    root_markers = {
-      '.eslintrc',
-      '.eslintrc.js',
-      '.eslintrc.cjs',
-      '.eslintrc.yaml',
-      '.eslintrc.yml',
-      '.eslintrc.json',
-      'eslint.config.js',
-      'eslint.config.mjs',
-      'package.json',
-      '.git',
-    },
+    root_markers = eslint_configs,
+    root_dir = function(bufnr, cb)
+      local fname = vim.api.nvim_buf_get_name(bufnr)
+      if fname == '' then
+        return cb(nil)
+      end
+
+      local root = vim.fs.root(fname, eslint_configs)
+
+      if root == nil then
+        return nil
+      end
+
+      return cb(root)
+    end,
+    on_attach = function(_, bufnr)
+      local client = has_client(bufnr, 'vue_ls')
+      if client then
+        client.server_capabilities.documentFormattingProvider = nil
+        client.server_capabilities.documentRangeFormattingProvider = nil
+      end
+    end,
     settings = {
       codeAction = {
         disableRuleComment = {
@@ -174,9 +216,7 @@ function M.setup()
         enable = true,
         mode = 'all',
       },
-      experimental = {
-        useFlatConfig = true,
-      },
+      useFlatConfig = true,
       format = true,
       autoFixOnSave = true,
       nodePath = '',
@@ -200,9 +240,14 @@ function M.setup()
     cmd = { 'vue-language-server', '--stdio' },
     filetypes = { 'vue' },
     root_markers = { 'package.json' },
+    on_attach = function(client, bufnr)
+      if has_client(bufnr, 'eslint') then
+        client.server_capabilities.documentFormattingProvider = nil
+        client.server_capabilities.documentRangeFormattingProvider = nil
+      end
+    end,
     on_init = function(client)
       local retries = 0
-
       ---@param _ lsp.ResponseError
       ---@param result any
       ---@param context lsp.HandlerContext
@@ -246,9 +291,6 @@ function M.setup()
       client.handlers['tsserver/request'] = typescriptHandler
     end,
   })
-
-  vim.lsp.enable(ts_servers.server_to_use)
-  vim.lsp.enable({ 'vue_ls', 'biome', 'eslint' })
 end
 
 return M

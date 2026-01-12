@@ -51,9 +51,6 @@ function M.setup()
       hoverProvider = false,
     },
   })
-
-  vim.lsp.enable('pyright')
-  vim.lsp.enable('ruff')
 end
 
 return M

@@ -16,9 +16,6 @@ function M.setup()
       },
     },
   })
-
-  -- Enable the server
-  vim.lsp.enable('gopls')
 end
 
 return M
