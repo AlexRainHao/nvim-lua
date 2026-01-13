@@ -1,6 +1,8 @@
+local prefer_llm = require('specific').prefer_llm
 return {
   {
     'yetone/avante.nvim',
+    enabled = false,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     -- ⚠️ must add this setting! ! !
     build = vim.fn.has('win32') ~= 0
@@ -14,7 +16,7 @@ return {
       -- add any opts here
       -- this file can contain specific instructions for your project
       instructions_file = 'avante.md',
-      provider = require('specific').prefer_llm,
+      provider = prefer_llm.adapter,
       providers = {
         deepseek = {
           __inherited_from = 'openai',
@@ -62,5 +64,45 @@ return {
         ft = { 'markdown', 'Avante' },
       },
     },
+  },
+  {
+    'olimorris/codecompanion.nvim',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
+      'nvim-treesitter/nvim-treesitter',
+      'ravitemer/mcphub.nvim',
+      'MeanderingProgrammer/render-markdown.nvim',
+      'HakonHarnes/img-clip.nvim'
+    },
+    config = function()
+      require('codecompanion').setup({
+        interactions = {
+          chat = prefer_llm,
+          inline = prefer_llm,
+          cmd = prefer_llm,
+          background = prefer_llm,
+        },
+        adapters = {
+          http = {
+            deepseek = function()
+              return require('codecompanion.adapters').extend('deepseek', {
+                url = vim.env.DEEPSEEK_API_ENDPOINT,
+                env = {
+                  api_key = 'DEEPSEEK_API_KEY'
+                },
+                schema = {
+                  model = {
+                    default = vim.env.DEEPSEEK_API_V3_MODEL,
+                    choices = {
+                      [vim.env.DEEPSEEK_API_V3_MODEL] = { formatted_name = 'DeepSeek V3', opts = { can_use_tools = true } },
+                    },
+                  }
+                }
+              })
+            end
+          }
+        }
+      })
+    end
   },
 }

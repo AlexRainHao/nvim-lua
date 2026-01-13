@@ -6,6 +6,9 @@ M = {}
 M.prefer_theme = 'gruvbox_material'
 
 -- `llm models`
-M.prefer_llm = 'deepseek'
+M.prefer_llm = {
+  adapter = 'deepseek',
+  model = vim.env.DEEPSEEK_API_V3_MODEL,
+}
 
 return M
