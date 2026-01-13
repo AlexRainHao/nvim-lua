@@ -52,4 +52,5 @@ require('lazy').setup({
   require('config.plugins.neotest'),
   require('config.plugins.llm'),
   require('config.plugins.qf'),
+  require('config.plugins.marks'),
 })
