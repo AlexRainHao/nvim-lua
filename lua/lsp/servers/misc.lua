@@ -4,7 +4,7 @@ function M.setup()
   -- JSON Language Server
   vim.lsp.config('jsonls', {
     cmd = { 'vscode-json-language-server', '--stdio' },
-    filetypes = { 'json', 'jsonc' },
+    filetypes = { 'json', 'jsonc', 'jsonl' },
     root_markers = { 'package.json', '.git' },
     init_options = {
       provideFormatter = true,

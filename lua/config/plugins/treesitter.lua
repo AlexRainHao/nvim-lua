@@ -4,6 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     build = ':TSUpdate',
+    branch = 'master',
     config = function()
       vim.opt.smartindent = false
       require('nvim-treesitter.configs').setup({

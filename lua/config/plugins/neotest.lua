@@ -7,7 +7,7 @@ return {
       'antoinemadec/FixCursorHold.nvim',
       'nvim-treesitter/nvim-treesitter',
       'nvim-neotest/neotest-python',
-      'fredrikaverpil/neotest-golang',
+      { 'fredrikaverpil/neotest-golang', version = '1.15.1' },
     },
     keys = {
       {
