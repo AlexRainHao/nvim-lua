@@ -82,6 +82,7 @@
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "ultisnips": { "branch": "master", "commit": "b22a86f9dcc5257624bff3c72d8b902eac468aad" },
   "uv.nvim": { "branch": "main", "commit": "b0bce1b61584fde99c316aa0587a4996c52df206" },
+  "vim-doge": { "branch": "master", "commit": "03a84072ef21b205237c77986c78914395d646c3" },
   "vim-illuminate": { "branch": "master", "commit": "0d1e93684da00ab7c057410fecfc24f434698898" },
   "vim-instant-markdown": { "branch": "master", "commit": "b0ed1a40888590d2ca70ffe41605f5276a30944a" },
   "vim-snippets": { "branch": "master", "commit": "ededcf7581962ee616cadab360d5966f3307f11a" },
