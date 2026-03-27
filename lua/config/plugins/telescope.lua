@@ -137,7 +137,6 @@ M.config = {
         },
       })
 
-      ts.load_extension('neoclip')
       ts.load_extension('telescope-tabs')
       ts.load_extension('fzf')
 

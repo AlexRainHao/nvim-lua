@@ -67,6 +67,13 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
+    cmd = {
+      'CodeCompanion',
+      'CodeCompanionActions',
+      'CodeCompanionChat',
+      'CodeCompanionCLI',
+      'CodeCompanionCmd',
+    },
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
       'nvim-treesitter/nvim-treesitter',

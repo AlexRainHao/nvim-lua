@@ -20,6 +20,7 @@ return {
   },
   {
     'alexpasmantier/pymple.nvim',
+    ft = 'python',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',

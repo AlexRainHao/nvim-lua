@@ -5,9 +5,16 @@ return {
       'nvim-telescope/telescope.nvim',
       { 'kkharji/sqlite.lua', module = 'sqlite' },
     },
+    keys = {
+      {
+        '<S-y>',
+        function()
+          require('telescope').extensions.neoclip.default()
+        end,
+        desc = 'Open neoclip history',
+      },
+    },
     config = function()
-      vim.keymap.set('n', '<S-y>', ':Telescope neoclip<CR>', { noremap = true })
-
       require('neoclip').setup({
         history = 1000,
         enable_persistent_history = true,
