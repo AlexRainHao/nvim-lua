@@ -55,7 +55,8 @@ local theme_config = {
   }
 }
 
-local function determine_teme()
+
+local function determine_theme()
   local _prefer_theme = require('specific').prefer_theme
 
   if not theme_config[_prefer_theme] then
@@ -130,9 +131,10 @@ M.config = {
       alpha.setup(dashboard.opts)
     end,
   },
-  determine_teme(),
+  determine_theme(),
   {
     'rcarriga/nvim-notify',
+    enabled = require('specific').use_notify,
     config = function()
       local notify = require('notify')
       vim.notify = notify

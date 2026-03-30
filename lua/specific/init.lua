@@ -11,4 +11,6 @@ M.prefer_llm = {
   model = vim.env.DEEPSEEK_API_V3_MODEL,
 }
 
+M.use_notify = false
+
 return M
