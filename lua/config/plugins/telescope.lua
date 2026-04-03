@@ -202,6 +202,24 @@ M.config = {
       })
     end,
   },
+  {
+    'ahmedkhalf/project.nvim',
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    },
+    keys = {
+      {
+        '<leader>P',
+        '<CMD>Telescope projects<CR>',
+        mode = 'n',
+        desc = 'Toggle projects',
+      },
+    },
+    config = function()
+      require('project_nvim').setup()
+    end
+  }
 }
+
 
 return M
