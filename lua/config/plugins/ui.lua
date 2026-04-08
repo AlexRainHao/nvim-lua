@@ -73,7 +73,14 @@ local M = {}
 M.config = {
   { 'nvim-tree/nvim-web-devicons',  opts = {} },
   { 'nvim-zh/colorful-winsep.nvim', config = true, event = { 'WinNew' } },
-  { 'j-hui/fidget.nvim',            opts = {} },
+  {
+    'yorickpeterse/nvim-window',
+    keys = {
+      { '<leader>wj', "<cmd>lua require('nvim-window').pick()<cr>", desc = 'nvim-window: Jump to window' },
+    },
+    config = true,
+  },
+  { 'j-hui/fidget.nvim', opts = {} },
   {
     'goolord/alpha-nvim',
     dependencies = {
