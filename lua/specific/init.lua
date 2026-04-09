@@ -2,8 +2,8 @@ vim.g.python3_host_prog = '/usr/bin/python3'
 
 M = {}
 
--- `everforest` | `onedark` | 'vitesse' | 'gruvbox' | 'kanagawa' | 'gruvbox_material'
-M.prefer_theme = 'gruvbox_material'
+-- `everforest` | `onedark` | 'vitesse' | 'gruvbox' | 'kanagawa' | 'gruvbox_material' | 'cyberdream'
+M.prefer_theme = 'cyberdream'
 
 -- `llm models`
 M.prefer_llm = {

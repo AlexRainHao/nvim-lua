@@ -52,6 +52,19 @@ local theme_config = {
       vim.g.gruvbox_material_enable_italic = true
       vim.cmd.colorscheme('gruvbox-material')
     end
+  },
+  cyberdream = {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('cyberdream').setup({
+        theme = 'auto',
+        transparent = true,
+      })
+
+      vim.cmd.colorscheme('cyberdream')
+    end
   }
 }
 
