@@ -7,8 +7,8 @@ M.prefer_theme = 'cyberdream'
 
 -- `llm models`
 M.prefer_llm = {
-  adapter = 'deepseek',
-  model = vim.env.DEEPSEEK_API_V3_MODEL,
+  adapter = 'moonshot',
+  model = vim.env.MOONSHOT_API_KIMI_MODEL,
 }
 
 M.use_notify = false

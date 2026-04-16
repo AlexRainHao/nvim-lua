@@ -83,6 +83,9 @@ return {
     },
     config = function()
       require('codecompanion').setup({
+        opts = {
+          language = 'Chinese',
+        },
         interactions = {
           chat = prefer_llm,
           inline = prefer_llm,
@@ -101,14 +104,32 @@ return {
                   model = {
                     default = vim.env.DEEPSEEK_API_V3_MODEL,
                     choices = {
-                      [vim.env.DEEPSEEK_API_V3_MODEL] = { formatted_name = 'DeepSeek V3', opts = { can_use_tools = true } },
+                      [vim.env.DEEPSEEK_API_V3_MODEL] = { formatted_name = 'DeepSeek V3', opts = { can_use_tools = false } },
                     },
                   }
                 }
               })
+            end,
+            moonshot = function()
+              return require('codecompanion.adapters').extend('deepseek', {
+                url = vim.env.MOONSHOT_API_ENDPOINT,
+                env = {
+                  api_key = 'MOONSHOT_API_KEY'
+                },
+                schema = {
+                  model = {
+                    default = vim.env.MOONSHOT_API_KIMI_MODEL,
+                    choices = {
+                      [vim.env.MOONSHOT_API_KIMI_MODEL] = { formatted_name = 'Kimi2.5', opts = { can_use_tools = true } },
+                    },
+                  },
+                  temperature = { default = 1 },
+                  top_p = { default = 0.95 }
+                },
+              })
             end
           }
-        }
+        },
       })
     end
   },
