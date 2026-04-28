@@ -8,7 +8,7 @@ return {
         keymaps = {
           init_selection = '<c-n>',
           node_incremental = '<c-n>',
-          ndoe_decremental = '<c-l>',
+          node_decremental = '<c-l>',
         },
       })
     end,

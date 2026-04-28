@@ -42,10 +42,13 @@ M.config = {
     end,
     dependencies = {
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-calc',
+      {
+        'tzachar/cmp-fuzzy-path',
+        dependencies = { 'tzachar/fuzzy.nvim', 'nvim-telescope/telescope-fzf-native.nvim' }
+      },
       {
         'onsails/lspkind.nvim',
         lazy = false,
@@ -251,6 +254,7 @@ M.config = {
 M.configfunc = function()
   local lspkind = require('lspkind')
   local cmp = require('cmp')
+  local compare = require('cmp.config.compare')
   local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
   local types = require('cmp.types')
 
@@ -289,45 +293,65 @@ M.configfunc = function()
         return kind
       end,
     },
+    sorting = {
+      priority_weight = 2,
+      comparators = {
+        require('cmp_fuzzy_path.compare'),
+        compare.offset,
+        compare.exact,
+        compare.score,
+        compare.recently_used,
+        compare.locality,
+        compare.kind,
+        compare.sort_text,
+        compare.length,
+        compare.order,
+      },
+    },
     sources = cmp.config.sources({
-        {
-          name = 'nvim_lsp',
-          entry_filter = function(entry, ctx)
-            if ctx.filetype ~= 'vue' then
-              return true
-            end
-
-            local bufnr = ctx.bufnr
-            local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
-            if cached_is_in_start_tag == nil then
-              vim.b[bufnr]._vue_ts_cached_is_in_start_tag = is_in_start_tag()
-            end
-            -- If not in start tag, return true
-            if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then
-              return true
-            end
-
-            local cursor_before_line = ctx.cursor_before_line
-            if cursor_before_line:sub(-1) == '@' then
-              return entry.completion_item.label:match('^@')
-            elseif cursor_before_line:sub(-1) == ':' then
-              return entry.completion_item.label:match('^:') and not entry.completion_item.label:match('^:on%-')
-              -- For slot
-            elseif cursor_before_line:sub(-1) == '#' then
-              return entry.completion_item.kind == types.lsp.CompletionItemKind.Method
-            else
-              return true
-            end
-          end
+      {
+        name = 'fuzzy_path',
+        option = {
+          fd_timeout_msec = 1500,
+          fd_cmd = { 'fd', '-d', '20', '-p', '-t', 'd', '-t', 'f' },
+          path_regex = [[\%(\k\?[/:\~]\+\|\.\?\.\/\)\S*]]
         },
-        { name = 'buffer' },
-        { name = 'ultisnips' },
       },
       {
-        { name = 'path' },
-        { name = 'nvim_lua' },
-        { name = 'calc' },
-      }),
+        name = 'nvim_lsp',
+        entry_filter = function(entry, ctx)
+          if ctx.filetype ~= 'vue' then
+            return true
+          end
+
+          local bufnr = ctx.bufnr
+          local cached_is_in_start_tag = vim.b[bufnr]._vue_ts_cached_is_in_start_tag
+          if cached_is_in_start_tag == nil then
+            vim.b[bufnr]._vue_ts_cached_is_in_start_tag = is_in_start_tag()
+          end
+          -- If not in start tag, return true
+          if vim.b[bufnr]._vue_ts_cached_is_in_start_tag == false then
+            return true
+          end
+
+          local cursor_before_line = ctx.cursor_before_line
+          if cursor_before_line:sub(-1) == '@' then
+            return entry.completion_item.label:match('^@')
+          elseif cursor_before_line:sub(-1) == ':' then
+            return entry.completion_item.label:match('^:') and not entry.completion_item.label:match('^:on%-')
+            -- For slot
+          elseif cursor_before_line:sub(-1) == '#' then
+            return entry.completion_item.kind == types.lsp.CompletionItemKind.Method
+          else
+            return true
+          end
+        end
+      },
+      { name = 'buffer' },
+      { name = 'ultisnips' },
+      { name = 'nvim_lua' },
+      { name = 'calc' },
+    }),
     mapping = cmp.mapping.preset.insert({
       ['<c-n>'] = cmp.config.disable,
       ['<c-p>'] = cmp.config.disable,

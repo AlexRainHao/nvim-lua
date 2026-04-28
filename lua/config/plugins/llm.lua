@@ -79,7 +79,8 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'ravitemer/mcphub.nvim',
       'MeanderingProgrammer/render-markdown.nvim',
-      'HakonHarnes/img-clip.nvim'
+      'HakonHarnes/img-clip.nvim',
+      'franco-ruggeri/codecompanion-spinner.nvim',
     },
     config = function()
       require('codecompanion').setup({
