@@ -4,52 +4,50 @@ return {
     lazy = false,
     priority = 1000,
     build = ':TSUpdate',
-    branch = 'master',
     config = function()
+      local ts = require('nvim-treesitter')
+      local indent_disabled = {
+        yaml = true,
+        dart = true,
+      }
+
       vim.opt.smartindent = false
-      require('nvim-treesitter.configs').setup({
-        auto_install = true,
-        sync_install = false,
-        ensure_installed = {
-          'html',
-          'css',
-          'javascript',
-          'typescript',
-          'python',
-          'c',
-          'cpp',
-          'bash',
-          'go',
-          'lua',
-          'vim',
-          'dockerfile',
-          'json',
-          'jsonc',
-          'yaml',
-          'toml',
-          'markdown',
-          'markdown_inline',
-          'rust',
-        },
-        highlight = {
-          enable = true,
-          disable = {}, -- list of language that will be disabled
-        },
-        indent = {
-          enable = true,
-          disable = function(lang)
-            local disallowed_filetypes = { 'yaml', 'dart' }
-            return vim.tbl_contains(disallowed_filetypes, lang)
-          end,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<c-n>',
-            node_incremental = '<c-n>',
-            node_decremental = '<c-l>',
-          },
-        },
+
+      ts.setup()
+      ts.install({
+        'html',
+        'css',
+        'javascript',
+        'typescript',
+        'python',
+        'c',
+        'cpp',
+        'bash',
+        'go',
+        'lua',
+        'vim',
+        'dockerfile',
+        'json',
+        'jsonc',
+        'yaml',
+        'toml',
+        'markdown',
+        'markdown_inline',
+        'rust',
+      })
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('nvim-treesitter-setup', { clear = true }),
+        callback = function(args)
+          local bufnr = args.buf
+          local filetype = vim.bo[bufnr].filetype
+
+          pcall(vim.treesitter.start, bufnr)
+
+          if not indent_disabled[filetype] then
+            vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
       })
     end,
   },

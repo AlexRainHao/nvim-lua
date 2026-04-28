@@ -7,7 +7,7 @@ return {
       'antoinemadec/FixCursorHold.nvim',
       'nvim-treesitter/nvim-treesitter',
       'nvim-neotest/neotest-python',
-      { 'fredrikaverpil/neotest-golang', version = '1.15.1' },
+      { 'fredrikaverpil/neotest-golang' },
     },
     keys = {
       {
@@ -40,9 +40,7 @@ return {
       },
     },
     config = function()
-      require('nvim-treesitter.configs').setup({
-        ensure_installed = { 'python' },
-      })
+      require('nvim-treesitter').install({ 'python', 'go' })
 
       require('neotest').setup({
         output = { open_on_run = true },
